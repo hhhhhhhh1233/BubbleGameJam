@@ -1,6 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://b1252cl26nnfu"]
+[gd_scene load_steps=7 format=3 uid="uid://c4ro20qskysbc"]
 
-[ext_resource type="PackedScene" uid="uid://bdhl3wjtvr113" path="res://player.tscn" id="1_efvf3"]
+[ext_resource type="PackedScene" path="res://player.tscn" id="1_efvf3"]
+[ext_resource type="PackedScene" uid="uid://dvkk5iitfh6bd" path="res://Enemy.tscn" id="2_0mfjr"]
+[ext_resource type="Script" path="res://EnemyNavigation.gd" id="3_8pfp0"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_iu66l"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
@@ -125,3 +127,11 @@ height = 18.0
 
 [node name="Player" parent="." instance=ExtResource("1_efvf3")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.655393, 1.78593, 1.536)
+
+[node name="Enemy" parent="." instance=ExtResource("2_0mfjr")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.4064, 1.57623, 0)
+
+[node name="NavigationAgent3D" parent="Enemy" index="2"]
+script = ExtResource("3_8pfp0")
+
+[editable path="Enemy"]
