@@ -6,8 +6,10 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_v5r2a"]
 
-[node name="Player" type="CharacterBody3D"]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "springArm")]
 script = ExtResource("1_wc8xc")
+camera = NodePath("MeshInstance3D/SpringArm3D/Camera3D")
+springArm = NodePath("MeshInstance3D/SpringArm3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_1m7lv")
@@ -15,5 +17,9 @@ shape = SubResource("CapsuleShape3D_1m7lv")
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_v5r2a")
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.94639, 0.323026, 0, -0.323026, 0.94639, 0, 2.09664, 6.12633)
+[node name="SpringArm3D" type="SpringArm3D" parent="MeshInstance3D"]
+transform = Transform3D(1, 0, 0, 0, 0.899115, 0.437712, 0, -0.437712, 0.899115, 0, 0.93131, 0.400328)
+spring_length = 2.0
+
+[node name="Camera3D" type="Camera3D" parent="MeshInstance3D/SpringArm3D"]
+transform = Transform3D(1, 0, 0, 0, 0.961799, -0.273757, 0, 0.273757, 0.961799, 0, 0.645698, 5.41997)

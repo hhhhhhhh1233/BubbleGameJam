@@ -1,11 +1,26 @@
 extends CharacterBody3D
+class_name Player
 
+@export
+var camera:Camera3D
+@export
+var springArm:SpringArm3D
+
+const camMin = -0.3
+const camMax = 0.7
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
+var lastMouse:Vector2
 
+func _ready() -> void:
+	#Input.mouse_mode = Input.MouseMode.MOUSE_MODE_CAPTURED;
+	lastMouse = get_viewport().get_mouse_position()
+	pass
 
 func _physics_process(delta: float) -> void:
+	
+	
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
@@ -26,3 +41,17 @@ func _physics_process(delta: float) -> void:
 		velocity.z = move_toward(velocity.z, 0, SPEED)
 
 	move_and_slide()
+
+	var deltaMouse:Vector2 = get_viewport().get_mouse_position()-lastMouse
+	
+	if camera.rotation.x-deltaMouse.y/150>camMin and camera.rotation.x-deltaMouse.y/150<camMax:
+		camera.rotation.x += -deltaMouse.y/150
+		springArm.rotation.x += -deltaMouse.y/150
+		
+	print(camera.rotation.x)
+	rotation.y += -deltaMouse.x/150
+	#camera.rotate(Vector3(1,0,0), -deltaMouse.y/150)
+	#springArm.rotate(Vector3(1,0,0), -deltaMouse.y/150)
+	
+	lastMouse = get_viewport().get_mouse_position()
+	
