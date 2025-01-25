@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdhl3wjtvr113"]
+[gd_scene load_steps=10 format=3 uid="uid://bdhl3wjtvr113"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_wc8xc"]
-[ext_resource type="PackedScene" uid="uid://h4gr2mpgmstq" path="res://bubbled_enemy.tscn" id="2_b8svv"]
+[ext_resource type="PackedScene" path="res://bubbled_enemy.tscn" id="2_b8svv"]
+[ext_resource type="Script" path="res://health_component.gd" id="2_elalu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1m7lv"]
 
@@ -70,3 +71,6 @@ spring_length = 6.0
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 0.961799, -0.273757, 0, 0.273757, 0.961799, 0, 0.645698, 5.41997)
+
+[node name="HealthComponent" type="Node3D" parent="."]
+script = ExtResource("2_elalu")
