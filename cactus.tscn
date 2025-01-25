@@ -1,0 +1,19 @@
+[gd_scene load_steps=4 format=3 uid="uid://bl62ckx5fjjs5"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_edopa"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_tuc85"]
+albedo_color = Color(0.105656, 0.800684, 0, 1)
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_3gq78"]
+
+[node name="Cactus" type="StaticBody3D"]
+collision_layer = 17
+collision_mask = 0
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+mesh = SubResource("CylinderMesh_edopa")
+surface_material_override/0 = SubResource("StandardMaterial3D_tuc85")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_3gq78")
