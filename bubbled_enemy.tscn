@@ -3,6 +3,7 @@
 [ext_resource type="Script" path="res://bubbled_enemy.gd" id="1_4afgl"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mbitp"]
+radius = 1.0
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gpt0l"]
 transparency = 1
@@ -10,11 +11,15 @@ albedo_color = Color(0, 0.427451, 1, 0.235294)
 
 [sub_resource type="SphereMesh" id="SphereMesh_hiyg1"]
 material = SubResource("StandardMaterial3D_gpt0l")
+radius = 1.0
+height = 2.0
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_q8efv"]
 radius = 5.0
 
 [node name="bubbledEnemy" type="RigidBody3D"]
+collision_layer = 8
+collision_mask = 15
 contact_monitor = true
 max_contacts_reported = 10
 script = ExtResource("1_4afgl")

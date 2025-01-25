@@ -52,7 +52,7 @@ shape = SubResource("BoxShape3D_uotb2")
 [node name="HeavyWeaponHitbox" type="Area3D" parent="Body/WeaponRoot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.48117)
 collision_layer = 0
-collision_mask = 4
+collision_mask = 12
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/WeaponRoot/HeavyWeaponHitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0525513, 0.0188446, 0.0548401)

@@ -1,10 +1,9 @@
 extends CharacterBody3D
 class_name Player
 
-@export
-var camera:Camera3D
-@export
-var springArm:SpringArm3D
+@export var camera:Camera3D
+@export var springArm:SpringArm3D
+@export var bubbleHitForceMultiplier = 5
 
 const camMin = -0.7
 const camMax = 0.7
@@ -73,11 +72,16 @@ func _physics_process(delta: float) -> void:
 	if bAttacking:
 		if bLightAttack:
 			for enemy in $Body/WeaponRoot/WeaponHitbox.get_overlapping_bodies():
-				print(enemy)
+				pass
+				#print(enemy)
 		else:
 			for enemy in $Body/WeaponRoot/HeavyWeaponHitbox.get_overlapping_bodies():
-				hitstop(0.01,0.5)
-				print(enemy)
+				print("yep")
+				if enemy.get_collision_layer_value(4):
+					hitstop(0.01,0.5)
+					var hit_direction = (enemy.global_position - global_position).normalized()
+					enemy.apply_central_impulse(hit_direction * bubbleHitForceMultiplier )
+					print(enemy)
 		
 		$Body/WeaponRoot.rotate_y(40 * delta)
 		if $Body/WeaponRoot.rotation.y > PI/2:
@@ -89,5 +93,8 @@ func hitstop (timeScale : float, duration : float):
 	Engine.time_scale = timeScale
 	await get_tree().create_timer(duration,true,false,true).timeout
 	Engine.time_scale = 1.0
+	
+	
+	
 	
 	

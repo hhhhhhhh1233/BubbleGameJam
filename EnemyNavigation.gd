@@ -12,7 +12,8 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	overlappingBodies = aggroCollision.get_overlapping_bodies()
 	if overlappingBodies.size() != 0:
-		print(overlappingBodies.size())
+		pass
+		#print(overlappingBodies.size())
 	self.target_position = $"../../Player".global_position
 	#print(target_position)
 	pass
