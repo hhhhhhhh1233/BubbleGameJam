@@ -9,11 +9,15 @@ var overlappingBodies : Array[Node3D]
 @export var hitrange = 5
 @export var hitvisualizer : MeshInstance3D
 
-var whackDelay = 1
+var whackDelay = 0.3
+var whackCooldown = 1
 var whackDamage = 20
 var canWhack:bool
+var whacking:bool
 var whackLast:float
+var whackStart:float
 var playerHealthComponent:HealthComponent
+var playerToWhack:Player
 
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
@@ -38,6 +42,13 @@ func whack(player: Player)->void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
+	
+	if whacking:
+		if Time.get_unix_time_from_system() >= whackStart + whackDelay:
+			whack(playerToWhack)
+			whacking=false
+		return
+	
 	hitvisualizer.visible=false
 	pos = get_global_transform().basis
 	$Body.look_at(Vector3(direction.x, global_position.y, direction.z))
@@ -47,9 +58,10 @@ func _process(delta: float) -> void:
 		if (overlappingBodies[0].global_position - global_position).length()<hitrange*0.5 :
 			direction = nav.get_next_path_position() - global_position
 			direction = direction.normalized()
-			
+			playerToWhack = overlappingBodies[0]
 			if canWhack:
-				whack(overlappingBodies[0])
+				whacking = true
+				whackStart = Time.get_unix_time_from_system()
 		
 		else:
 			direction = nav.get_next_path_position() - global_position
@@ -62,9 +74,16 @@ func _process(delta: float) -> void:
 		
 	move_and_slide()
 	
-	if Time.get_unix_time_from_system() - whackLast > whackDelay:
+	if Time.get_unix_time_from_system() - whackLast > whackCooldown:
 		canWhack=true
 	
 	pass
+
+func bubble():
+	var EnemyPosition = position
+	var BubbledEnemy = load("res://bubbled_enemy.tscn").instantiate()
+	add_sibling(BubbledEnemy)
+	BubbledEnemy.initialize(EnemyPosition, 3)
+	queue_free()
 
 #func _physics_process(delta: float) -> void:
