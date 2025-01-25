@@ -22,6 +22,7 @@ func initialize(pos, unbubble_time):
 func _physics_process(delta: float) -> void:
 	last_velocity = linear_velocity
 	
+	
 func exploded() -> void:
 	queue_free()
 	

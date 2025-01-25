@@ -98,6 +98,7 @@ func _physics_process(delta: float) -> void:
 				if enemy.get_collision_layer_value(4):
 					hitstop(hitstopScale,hitstopDuration)
 					var hit_direction = (enemy.global_position - global_position).normalized()
+					enemy.linear_velocity = Vector3()
 					enemy.apply_central_impulse(hit_direction * bubbleHitForceMultiplier )
 					print(enemy)
 		#bAttacking = true
