@@ -18,12 +18,13 @@ size = Vector3(3.39816, 1.02843, 2.7475)
 
 [sub_resource type="BoxMesh" id="BoxMesh_qpckj"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "springArm")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "springArm", "healthComponent")]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_wc8xc")
 camera = NodePath("SpringArm3D/Camera3D")
 springArm = NodePath("SpringArm3D")
+healthComponent = NodePath("HealthComponent")
 BubbledEnemyScene = ExtResource("2_b8svv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
