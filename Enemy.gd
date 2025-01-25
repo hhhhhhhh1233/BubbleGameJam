@@ -28,6 +28,7 @@ func _ready() -> void:
 
 func whack(player: Player)->void:
 	canWhack=false
+	$Body/AnimationTree["parameters/attack/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 	whackLast = Time.get_unix_time_from_system()
 	hitvisualizer.visible=true
 	if playerHealthComponent == null:
@@ -72,6 +73,7 @@ func _process(delta: float) -> void:
 		else:
 			velocity = velocity.lerp(direction * speed, accel * delta)
 		
+	$Body/AnimationTree["parameters/speed/blend_amount"] = min(velocity.length(),1)
 	move_and_slide()
 	
 	if Time.get_unix_time_from_system() - whackLast > whackCooldown:

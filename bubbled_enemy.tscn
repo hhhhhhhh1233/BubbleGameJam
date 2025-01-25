@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://bubbled_enemy.gd" id="1_4afgl"]
 [ext_resource type="PackedScene" uid="uid://dvkk5iitfh6bd" path="res://Enemy.tscn" id="2_hhpa0"]
-[ext_resource type="PackedScene" path="res://Bubble_pop_explosion_scene.tscn" id="3_7my5g"]
-[ext_resource type="Material" path="res://Bubble.material" id="4_ga0mt"]
+[ext_resource type="PackedScene" uid="uid://piugtnyt28ei" path="res://Bubble_pop_explosion_scene.tscn" id="3_7my5g"]
+[ext_resource type="Material" uid="uid://bex0j45wf5bul" path="res://Bubble.material" id="4_ga0mt"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yikrv"]
 friction = 0.0
