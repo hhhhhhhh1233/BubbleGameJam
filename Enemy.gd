@@ -26,14 +26,11 @@ func whack(player: Player)->void:
 	canWhack=false
 	whackLast = Time.get_unix_time_from_system()
 	hitvisualizer.visible=true
-	var count = player.get_child_count()
-	var i = 0
 	if playerHealthComponent == null:
-		while i < count:	
-			if player.get_child(i) is HealthComponent:
-				playerHealthComponent = player.get_child(i) as HealthComponent
+		for child in player.get_children():
+			if child is HealthComponent:
+				playerHealthComponent = child as HealthComponent
 				break
-			i+=1
 	playerHealthComponent.Damage(whackDamage)
 	#print(playerHealthComponent.health)
 	
