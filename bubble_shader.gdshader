@@ -23,7 +23,7 @@ void vertex() {
 
 void fragment() {
 
-	ALBEDO =   texture(color_texture,world_position.xyz + vec3(TIME )).rgb;
+	ALBEDO =   texture(color_texture,world_position.xyz + vec3(TIME * 0.1 )).rgb;
 	float fresnel = fresnel(NORMAL,PROJECTION_MATRIX);
 	ALPHA = fresnel;
 }

@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Player.gd" id="1_wc8xc"]
 [ext_resource type="PackedScene" path="res://bubbled_enemy.tscn" id="2_b8svv"]
 [ext_resource type="Script" path="res://health_component.gd" id="2_elalu"]
-[ext_resource type="PackedScene" path="res://3D/Rat/rat.tscn" id="3_q63yt"]
+[ext_resource type="PackedScene" uid="uid://d11k7524yknh6" path="res://3D/Rat/rat.tscn" id="3_q63yt"]
 [ext_resource type="Script" path="res://HUD.gd" id="5_d18j7"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1m7lv"]

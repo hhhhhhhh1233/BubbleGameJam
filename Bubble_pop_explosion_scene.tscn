@@ -1,6 +1,7 @@
-[gd_scene load_steps=10 format=3 uid="uid://piugtnyt28ei"]
+[gd_scene load_steps=5 format=3 uid="uid://piugtnyt28ei"]
 
-[ext_resource type="Shader" path="res://bubble_shader.gdshader" id="1_8kfoe"]
+[ext_resource type="Material" uid="uid://bex0j45wf5bul" path="res://Bubble.material" id="1_3m64h"]
+[ext_resource type="Script" path="res://bubble_pop_explosion_scene.gd" id="2_frtlx"]
 
 [sub_resource type="ParticleProcessMaterial" id="ParticleProcessMaterial_t3bn4"]
 emission_shape = 2
@@ -12,41 +13,16 @@ gravity = Vector3(0, 5, 0)
 linear_accel_min = -30.0
 linear_accel_max = -20.0
 
-[sub_resource type="Gradient" id="Gradient_r3a42"]
-offsets = PackedFloat32Array(0, 0.25, 0.5, 0.75, 1)
-colors = PackedColorArray(1, 0, 0, 1, 0.5, 1, 0, 1, 0, 1, 1, 1, 0, 0, 1, 1, 1, 0, 0.0166664, 1)
-metadata/_snap_enabled = true
-metadata/_snap_count = 4
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_wdogf"]
-noise_type = 3
-frequency = 0.0612
-
-[sub_resource type="NoiseTexture3D" id="NoiseTexture3D_djn1c"]
-seamless = true
-color_ramp = SubResource("Gradient_r3a42")
-noise = SubResource("FastNoiseLite_wdogf")
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_2t1o6"]
-
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_nc1u7"]
-seamless = true
-noise = SubResource("FastNoiseLite_2t1o6")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_828vv"]
-render_priority = 0
-shader = ExtResource("1_8kfoe")
-shader_parameter/smoothness = 0.1
-shader_parameter/noise_texture = SubResource("NoiseTexture2D_nc1u7")
-shader_parameter/color_texture = SubResource("NoiseTexture3D_djn1c")
-
 [sub_resource type="SphereMesh" id="SphereMesh_3ew8l"]
-material = SubResource("ShaderMaterial_828vv")
+material = ExtResource("1_3m64h")
+radius = 0.3
+height = 0.6
 
-[node name="Node3D" type="Node3D"]
-
-[node name="GPUParticles3D" type="GPUParticles3D" parent="."]
+[node name="GPUParticles3D" type="GPUParticles3D"]
 emitting = false
-amount = 300
+amount = 150
 process_material = SubResource("ParticleProcessMaterial_t3bn4")
 draw_pass_1 = SubResource("SphereMesh_3ew8l")
+script = ExtResource("2_frtlx")
+
+[node name="Node3D" type="Node3D" parent="."]
