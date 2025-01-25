@@ -8,16 +8,16 @@ var springArm:SpringArm3D
 
 const camMin = -0.7
 const camMax = 0.7
+const sensitivity = 0.03
+
 
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
-var lastMouse:Vector2
 
 var bAttacking = false
 
 func _ready() -> void:
 	#Input.mouse_mode = Input.MouseMode.MOUSE_MODE_CAPTURED;
-	lastMouse = get_viewport().get_mouse_position()
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -46,17 +46,17 @@ func _physics_process(delta: float) -> void:
 
 	move_and_slide()
 
-	var deltaMouse:Vector2 = get_viewport().get_mouse_position()-lastMouse
+	var input_camera := Input.get_vector("camera_left", "camera_right", "camera_forward", "camera_back")
 	
-	if springArm.rotation.x-deltaMouse.y/150>camMin and springArm.rotation.x-deltaMouse.y/150<camMax:
-		#camera.rotation.x += -deltaMouse.y/150
-		springArm.rotation.x += -deltaMouse.y/150
+	if springArm.rotation.x-input_camera.y*sensitivity>camMin and springArm.rotation.x-input_camera.y*sensitivity<camMax:
+		#camera.rotation.x += -input_camera.y*sensitivity
+		springArm.rotation.x += -input_camera.y*sensitivity
 		
-	print(camera.rotation.x)
-	#rotation.y += -deltaMouse.x/150
-	#camera.rotate(Vector3(1,0,0), -deltaMouse.y/150)
-	#springArm.rotate(Vector3(1,0,0), -deltaMouse.y/150)
-	springArm.rotation.y += -deltaMouse.x/150
+	print(springArm.rotation.x)
+	#rotation.y += -input_camera.x*sensitivity
+	#camera.rotate(Vector3(1,0,0), -input_camera.y*sensitivity)
+	#springArm.rotate(Vector3(1,0,0), -input_camera.y*sensitivity)
+	springArm.rotation.y += -input_camera.x*sensitivity
 	
 	if Input.is_action_just_pressed("light_attack"):
 		bAttacking = true
@@ -68,8 +68,4 @@ func _physics_process(delta: float) -> void:
 		if $Body/WeaponRoot.rotation.y > PI/2:
 			bAttacking = true
 			$Body/WeaponRoot/WeaponModel.hide()
-			
-		
-	
-	lastMouse = get_viewport().get_mouse_position()
 	
