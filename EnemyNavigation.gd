@@ -1,6 +1,8 @@
 extends NavigationAgent3D
 
-@onready var Player : CharacterBody3D
+@onready var player : CharacterBody3D
+@onready var aggroCollision : Area3D = $AggroCollision
+var overlappingBodies : Array[Node3D]
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
@@ -8,7 +10,10 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	self.target_position = Vector3(0,0,0)
+	overlappingBodies = aggroCollision.get_overlapping_bodies()
+	if overlappingBodies.size() != 0:
+		print(overlappingBodies.size())
+	self.target_position = $"../../Player".global_position
 	#print(target_position)
 	pass
 	
