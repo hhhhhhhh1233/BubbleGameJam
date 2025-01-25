@@ -51,7 +51,7 @@ func _process(delta: float) -> void:
 	
 	hitvisualizer.visible=false
 	pos = get_global_transform().basis
-	$Body.look_at(Vector3(direction.x, global_position.y, direction.z))
+	$Body.look_at(Vector3(global_position.x + direction.x, global_position.y, global_position.z + direction.z))
 	overlappingBodies = aggroCollision.get_overlapping_bodies()
 	if overlappingBodies.size() != 0:
 		
