@@ -2,6 +2,7 @@
 
 [ext_resource type="Script" path="res://bubbled_enemy.gd" id="1_4afgl"]
 [ext_resource type="PackedScene" uid="uid://dvkk5iitfh6bd" path="res://Enemy.tscn" id="2_hhpa0"]
+[ext_resource type="Material" uid="uid://bg7kayd7mfkk4" path="res://bubble_mat.tres" id="3_p6uer"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_yikrv"]
 friction = 0.0
@@ -10,12 +11,8 @@ bounce = 1.0
 [sub_resource type="SphereShape3D" id="SphereShape3D_mbitp"]
 radius = 1.0
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gpt0l"]
-transparency = 1
-albedo_color = Color(0, 0.427451, 1, 0.235294)
-
 [sub_resource type="SphereMesh" id="SphereMesh_hiyg1"]
-material = SubResource("StandardMaterial3D_gpt0l")
+material = ExtResource("3_p6uer")
 radius = 1.0
 height = 2.0
 
