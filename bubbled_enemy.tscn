@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://h4gr2mpgmstq"]
+
+[ext_resource type="Script" path="res://bubbled_enemy.gd" id="1_4afgl"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_mbitp"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_gpt0l"]
+albedo_color = Color(0, 0.427451, 1, 1)
+
+[sub_resource type="SphereMesh" id="SphereMesh_hiyg1"]
+material = SubResource("StandardMaterial3D_gpt0l")
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_q8efv"]
+radius = 5.0
+
+[node name="bubbledEnemy" type="RigidBody3D"]
+contact_monitor = true
+max_contacts_reported = 10
+script = ExtResource("1_4afgl")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("SphereShape3D_mbitp")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="CollisionShape3D"]
+mesh = SubResource("SphereMesh_hiyg1")
+
+[node name="Area3D" type="Area3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Area3D"]
+shape = SubResource("SphereShape3D_q8efv")
+disabled = true
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_shape_entered" from="." to="." method="_on_body_shape_entered"]
