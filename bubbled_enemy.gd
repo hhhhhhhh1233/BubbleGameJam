@@ -34,7 +34,11 @@ func unbubble() -> void:
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	for i in state.get_contact_count():
-		pass
+		if linear_velocity.project(state.get_contact_local_normal(i)).length() > 20:
+			#print("Hit something hard!")
+			exploded()
+		#print(linear_velocity.project(state.get_contact_local_normal(i)).length())
+		#pass
 		#if linear_velocity.normalized().dot(state.get_contact_local_normal(i)) <= fatal_collision_angle and last_velocity.length() >= speed_exploding_threshold:
 			#exploded()
 		#
