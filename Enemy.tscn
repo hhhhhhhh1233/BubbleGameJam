@@ -13,7 +13,6 @@ albedo_color = Color(1, 0.129412, 0, 1)
 material = SubResource("StandardMaterial3D_6ws61")
 
 [sub_resource type="BoxMesh" id="BoxMesh_lk1y2"]
-material = SubResource("StandardMaterial3D_6ws61")
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4p3sc"]
 radius = 50.0
@@ -36,7 +35,7 @@ shape = SubResource("CapsuleShape3D_8fg43")
 mesh = SubResource("CapsuleMesh_w07p4")
 
 [node name="Head" type="MeshInstance3D" parent="Body"]
-transform = Transform3D(1, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0.442267, 0.332674)
+transform = Transform3D(0.5, 0, 0, 0, 0.7, 0, 0, 0, 0.5, 0, 0.241267, 0.332674)
 mesh = SubResource("BoxMesh_lk1y2")
 
 [node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

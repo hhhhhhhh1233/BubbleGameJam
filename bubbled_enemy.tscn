@@ -23,7 +23,11 @@ radius = 5.0
 [node name="bubbledEnemy" type="RigidBody3D"]
 collision_layer = 8
 collision_mask = 15
+axis_lock_angular_x = true
+axis_lock_angular_y = true
+axis_lock_angular_z = true
 physics_material_override = SubResource("PhysicsMaterial_yikrv")
+gravity_scale = 0.5
 contact_monitor = true
 max_contacts_reported = 10
 linear_damp_mode = 1

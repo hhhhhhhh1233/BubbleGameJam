@@ -13,14 +13,14 @@ class_name Player
 
 const camMin = -1.1
 const camMax = 0.7
-const sensitivity = 0.03
+const sensitivity = 0.06
 const sensitivityMouse = 0.01
 
 var lastMouse:Vector2
 	
 
-const SPEED = 8.0
-const JUMP_VELOCITY = 8.5
+const SPEED = 10.0
+const JUMP_VELOCITY = 12
 
 #var bAttacking = false
 #var bLightAttack = false

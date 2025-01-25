@@ -92,6 +92,7 @@ func _spawn_enemy():
 
 func _begin_wave():
 	wave_count += 1
+	WaveInformation.WaveCount = wave_count
 	if wave_count > 1:
 		total_wave_enemy_count *= 1.2
 		enemies_left_to_spawn = total_wave_enemy_count
