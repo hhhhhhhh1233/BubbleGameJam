@@ -4,6 +4,8 @@ class_name Player
 @export var camera:Camera3D
 @export var springArm:SpringArm3D
 @export var bubbleHitForceMultiplier = 35
+@export var healthComponent:HealthComponent
+
 
 @export var BubbledEnemyScene : PackedScene
 
@@ -23,8 +25,8 @@ func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
-	
-	
+	if healthComponent.health <= 0:
+		return
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
