@@ -3,6 +3,7 @@ extends RigidBody3D
 @export var fatal_collision_angle : float = 0.5
 
 @export var EnemyScene : PackedScene
+@export var poppedScene : PackedScene
 
 var collision_normals : Array[Vector3]
 
@@ -24,6 +25,9 @@ func _physics_process(delta: float) -> void:
 	
 	
 func exploded() -> void:
+	var pop = poppedScene.instantiate()
+	add_sibling(pop)
+	pop.position = position
 	queue_free()
 	
 func unbubble() -> void:
