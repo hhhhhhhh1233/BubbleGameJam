@@ -45,6 +45,7 @@ func _physics_process(delta: float) -> void:
 		velocity.z = direction.z * SPEED
 		
 		$Body.look_at(position - Vector3(direction.x, 0, direction.z))
+		
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
