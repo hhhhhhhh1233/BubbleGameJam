@@ -28,13 +28,9 @@ func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 		if linear_velocity.normalized().dot(state.get_contact_local_normal(i)) <= fatal_collision_angle and last_velocity.length() >= speed_exploding_threshold:
 			exploded()
 		
+		
+func hit_stop(time_scale : float,duration: float):
+	Engine.time_scale = time_scale
+	await get_tree().create_timer(duration,true,false,true).timeout
+	Engine.time_scale = 1
 	
-func _on_body_entered(body: Node) -> void:
-	
-	var collision_direction = (body.global_position - global_position).normalized()
-	if linear_velocity.normalized().dot(-collision_direction.normalized()) >= fatal_collision_angle:
-		pass
-
-
-func _on_body_shape_entered(body_rid: RID, body: Node, body_shape_index: int, local_shape_index: int) -> void:
-	pass
