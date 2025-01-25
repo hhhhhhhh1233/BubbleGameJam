@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://8t4y88medsdv"]
+
+[ext_resource type="Script" path="res://wave_manager.gd" id="1_m863r"]
+[ext_resource type="PackedScene" uid="uid://dvkk5iitfh6bd" path="res://Enemy.tscn" id="2_86gfd"]
+
+[sub_resource type="Curve3D" id="Curve3D_hknfh"]
+_data = {
+"points": PackedVector3Array(0, 0, 0, 0, 0, 0, 2.5, 0, -2.5, 0, 0, 0, 0, 0, 0, -2.5, 0, -2.5, 0, 0, 0, 0, 0, 0, -2.5, 0, 2.5, 0, 0, 0, 0, 0, 0, 2.5, 0, 2.5, 0, 0, 0, 0, 0, 0, 2.5, 0, -2.5),
+"tilts": PackedFloat32Array(0, 0, 0, 0, 0)
+}
+point_count = 5
+
+[node name="wave_manager" type="Node3D"]
+script = ExtResource("1_m863r")
+enemy_scene = ExtResource("2_86gfd")
+
+[node name="spawnpoints" type="Node3D" parent="."]
+
+[node name="spawn_point" type="Marker3D" parent="spawnpoints"]
+
+[node name="spawn_path" type="Path3D" parent="spawnpoints/spawn_point"]
+curve = SubResource("Curve3D_hknfh")
+
+[node name="spawn_location" type="PathFollow3D" parent="spawnpoints/spawn_point/spawn_path"]
+transform = Transform3D(-4.37114e-08, 0, 1, 0, 1, 0, -1, 0, -4.37114e-08, 2.5, 0, -2.5)
+
+[node name="enemies" type="Node3D" parent="."]
