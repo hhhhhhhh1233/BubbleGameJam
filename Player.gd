@@ -15,6 +15,7 @@ const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
 var bAttacking = false
+var bLightAttack = false
 
 func _ready() -> void:
 	#Input.mouse_mode = Input.MouseMode.MOUSE_MODE_CAPTURED;
@@ -59,15 +60,26 @@ func _physics_process(delta: float) -> void:
 	
 	if Input.is_action_just_pressed("light_attack"):
 		bAttacking = true
+		bLightAttack = true
 		$Body/WeaponRoot/WeaponModel.show()
 		$Body/WeaponRoot.rotation = Vector3(0, -PI/2, 0)
 		
+	if Input.is_action_just_pressed("heavy_attack"):
+		bAttacking = true
+		bLightAttack = false
+		$Body/WeaponRoot/HeavyWeaponModel.show()
+		$Body/WeaponRoot.rotation = Vector3(0, -PI/2, 0)
+		
 	if bAttacking:
-		for enemy in $Body/WeaponRoot/WeaponHitbox.get_overlapping_bodies():
-			print(enemy)
+		if bLightAttack:
+			for enemy in $Body/WeaponRoot/WeaponHitbox.get_overlapping_bodies():
+				print(enemy)
+		else:
+			for enemy in $Body/WeaponRoot/HeavyWeaponHitbox.get_overlapping_bodies():
+				print(enemy)
 		
 		$Body/WeaponRoot.rotate_y(0.2)
 		if $Body/WeaponRoot.rotation.y > PI/2:
 			bAttacking = false
 			$Body/WeaponRoot/WeaponModel.hide()
-	
+			$Body/WeaponRoot/HeavyWeaponModel.hide()

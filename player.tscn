@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bdhl3wjtvr113"]
+[gd_scene load_steps=8 format=3 uid="uid://bdhl3wjtvr113"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_wc8xc"]
 
@@ -7,6 +7,9 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_v5r2a"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qkne2"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_817gi"]
+albedo_color = Color(0.964706, 0.160784, 0.211765, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uotb2"]
 size = Vector3(0.439819, 0.40744, 2.7475)
@@ -32,12 +35,26 @@ mesh = SubResource("CapsuleMesh_v5r2a")
 transform = Transform3D(0.401152, 0, 0, 0, 0.307252, 0, 0, 0, 2.42056, 0, 0, 1.6416)
 mesh = SubResource("BoxMesh_qkne2")
 
+[node name="HeavyWeaponModel" type="MeshInstance3D" parent="Body/WeaponRoot"]
+transform = Transform3D(0.401152, 0, 0, 0, 0.307252, 0, 0, 0, 2.42056, 0, 0, 1.6416)
+mesh = SubResource("BoxMesh_qkne2")
+surface_material_override/0 = SubResource("StandardMaterial3D_817gi")
+
 [node name="WeaponHitbox" type="Area3D" parent="Body/WeaponRoot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.48117)
 collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/WeaponRoot/WeaponHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0525513, 0.0188446, 0.0548401)
+shape = SubResource("BoxShape3D_uotb2")
+
+[node name="HeavyWeaponHitbox" type="Area3D" parent="Body/WeaponRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.48117)
+collision_layer = 0
+collision_mask = 4
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/WeaponRoot/HeavyWeaponHitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0525513, 0.0188446, 0.0548401)
 shape = SubResource("BoxShape3D_uotb2")
 
