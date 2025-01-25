@@ -3,7 +3,9 @@ class_name Player
 
 @export var camera:Camera3D
 @export var springArm:SpringArm3D
-@export var bubbleHitForceMultiplier = 5
+@export var bubbleHitForceMultiplier = 35
+
+@export var BubbledEnemyScene : PackedScene
 
 const camMin = -0.7
 const camMax = 0.7
@@ -13,8 +15,8 @@ const sensitivity = 0.03
 const SPEED = 5.0
 const JUMP_VELOCITY = 4.5
 
-var bAttacking = false
-var bLightAttack = false
+#var bAttacking = false
+#var bLightAttack = false
 
 func _ready() -> void:
 	#Input.mouse_mode = Input.MouseMode.MOUSE_MODE_CAPTURED;
@@ -58,36 +60,54 @@ func _physics_process(delta: float) -> void:
 	springArm.rotation.y += -input_camera.x*sensitivity
 	
 	if Input.is_action_just_pressed("light_attack"):
-		bAttacking = true
-		bLightAttack = true
-		$Body/WeaponRoot/WeaponModel.show()
-		$Body/WeaponRoot.rotation = Vector3(0, -PI/2, 0)
+		for enemy in $Body/WeaponRoot/WeaponHitbox.get_overlapping_bodies():
+				var EnemyPosition = enemy.position
+				enemy.queue_free()
+				var BubbledEnemy = BubbledEnemyScene.instantiate()
+				BubbledEnemy.position = EnemyPosition
+				add_sibling(BubbledEnemy)
+				#print(enemy)
+		#bAttacking = true
+		#bLightAttack = true
+		#$Body/WeaponRoot/WeaponModel.show()
+		#$Body/WeaponRoot.rotation = Vector3(0, -PI/2, 0)
 		
 	if Input.is_action_just_pressed("heavy_attack"):
-		bAttacking = true
-		bLightAttack = false
-		$Body/WeaponRoot/HeavyWeaponModel.show()
-		$Body/WeaponRoot.rotation = Vector3(0, -PI/2, 0)
-		
-	if bAttacking:
-		if bLightAttack:
-			for enemy in $Body/WeaponRoot/WeaponHitbox.get_overlapping_bodies():
-				pass
-				#print(enemy)
-		else:
-			for enemy in $Body/WeaponRoot/HeavyWeaponHitbox.get_overlapping_bodies():
+		for enemy in $Body/WeaponRoot/HeavyWeaponHitbox.get_overlapping_bodies():
 				print("yep")
 				if enemy.get_collision_layer_value(4):
 					hitstop(0.01,0.5)
 					var hit_direction = (enemy.global_position - global_position).normalized()
 					enemy.apply_central_impulse(hit_direction * bubbleHitForceMultiplier )
 					print(enemy)
+		#bAttacking = true
+		#bLightAttack = false
+		#$Body/WeaponRoot/HeavyWeaponModel.show()
+		#$Body/WeaponRoot.rotation = Vector3(0, -PI/2, 0)
 		
-		$Body/WeaponRoot.rotate_y(40 * delta)
-		if $Body/WeaponRoot.rotation.y > PI/2:
-			bAttacking = false
-			$Body/WeaponRoot/WeaponModel.hide()
-			$Body/WeaponRoot/HeavyWeaponModel.hide()
+	#if bAttacking:
+		#if bLightAttack:
+			#for enemy in $Body/WeaponRoot/WeaponHitbox.get_overlapping_bodies():
+				#var EnemyPosition = enemy.position
+				#enemy.queue_free()
+				#var BubbledEnemy = BubbledEnemyScene.instantiate()
+				#BubbledEnemy.position = EnemyPosition
+				#add_sibling(BubbledEnemy)
+				##print(enemy)
+		#else:
+			#for enemy in $Body/WeaponRoot/HeavyWeaponHitbox.get_overlapping_bodies():
+				#print("yep")
+				#if enemy.get_collision_layer_value(4):
+					#hitstop(0.01,0.5)
+					#var hit_direction = (enemy.global_position - global_position).normalized()
+					#enemy.apply_central_impulse(hit_direction * bubbleHitForceMultiplier )
+					#print(enemy)
+		#
+		#$Body/WeaponRoot.rotate_y(40 * delta)
+		#if $Body/WeaponRoot.rotation.y > PI/2:
+			#bAttacking = false
+			#$Body/WeaponRoot/WeaponModel.hide()
+			#$Body/WeaponRoot/HeavyWeaponModel.hide()
 			
 func hitstop (timeScale : float, duration : float):
 	Engine.time_scale = timeScale
