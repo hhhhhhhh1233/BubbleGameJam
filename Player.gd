@@ -4,6 +4,8 @@ class_name Player
 @export var camera:Camera3D
 @export var springArm:SpringArm3D
 @export var bubbleHitForceMultiplier = 35
+@export var hitstopScale = 0.01
+@export var hitstopDuration = 0.5
 @export var healthComponent:HealthComponent
 
 
@@ -30,6 +32,10 @@ func _physics_process(delta: float) -> void:
 	# Add the gravity.
 	if not is_on_floor():
 		velocity += get_gravity() * delta
+		$Body/AnimationTree["parameters/grounded/blend_amount"] = 0.0
+	else:
+		$Body/AnimationTree["parameters/grounded/blend_amount"] = 1.0
+		
 
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") and is_on_floor():
@@ -43,13 +49,17 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
-		
 		$Body.look_at(position - Vector3(direction.x, 0, direction.z))
 		
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+		
+	
+		
+		
 
+	$Body/AnimationTree["parameters/speed/blend_amount"] = lerpf(-1,1,direction.length())
 	move_and_slide()
 
 	var input_camera := Input.get_vector("camera_left", "camera_right", "camera_forward", "camera_back")
@@ -64,6 +74,8 @@ func _physics_process(delta: float) -> void:
 	springArm.rotation.y += -input_camera.x*sensitivity
 	
 	if Input.is_action_just_pressed("light_attack"):
+		if not $Body/AnimationTree["parameters/attack/active"]:
+			$Body/AnimationTree["parameters/attack/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 		for enemy in $Body/WeaponRoot/WeaponHitbox.get_overlapping_bodies():
 				var EnemyPosition = enemy.position
 				var BubbledEnemy = BubbledEnemyScene.instantiate()
@@ -78,10 +90,13 @@ func _physics_process(delta: float) -> void:
 		#$Body/WeaponRoot.rotation = Vector3(0, -PI/2, 0)
 		
 	if Input.is_action_just_pressed("heavy_attack"):
+		if not $Body/AnimationTree["parameters/kick/active"]:
+			$Body/AnimationTree["parameters/kick/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
+			
 		for enemy in $Body/WeaponRoot/HeavyWeaponHitbox.get_overlapping_bodies():
-				print("yep")
+				
 				if enemy.get_collision_layer_value(4):
-					hitstop(0.01,0.5)
+					hitstop(hitstopScale,hitstopDuration)
 					var hit_direction = (enemy.global_position - global_position).normalized()
 					enemy.apply_central_impulse(hit_direction * bubbleHitForceMultiplier )
 					print(enemy)
@@ -115,8 +130,10 @@ func _physics_process(delta: float) -> void:
 			#$Body/WeaponRoot/HeavyWeaponModel.hide()
 			
 func hitstop (timeScale : float, duration : float):
-	Engine.time_scale = timeScale
+	Engine.time_scale =  timeScale
+	$Body/AnimationTree["parameters/kick_time/scale"] = 1/ hitstopScale
 	await get_tree().create_timer(duration,true,false,true).timeout
+	$Body/AnimationTree["parameters/kick_time/scale"] = 2
 	Engine.time_scale = 1.0
 	
 	
