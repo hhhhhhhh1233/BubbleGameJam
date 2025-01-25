@@ -1,7 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://dvkk5iitfh6bd"]
+[gd_scene load_steps=10 format=3 uid="uid://dvkk5iitfh6bd"]
 
 [ext_resource type="Script" path="res://Enemy.gd" id="1_u1mr4"]
 [ext_resource type="Script" path="res://EnemyNavigation.gd" id="2_43a8a"]
+[ext_resource type="Script" path="res://health_component.gd" id="3_nswuu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8fg43"]
 
@@ -20,7 +21,7 @@ radius = 50.0
 [sub_resource type="SphereMesh" id="SphereMesh_d3fgm"]
 
 [node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("aggroCollision", "hitvisualizer")]
-collision_layer = 4
+collision_layer = 20
 collision_mask = 7
 axis_lock_angular_x = true
 axis_lock_angular_z = true
@@ -52,3 +53,6 @@ shape = SubResource("SphereShape3D_4p3sc")
 transform = Transform3D(3, 0, 0, 0, 3, 0, 0, 0, 3, 0, 0, 0)
 visible = false
 mesh = SubResource("SphereMesh_d3fgm")
+
+[node name="HealthComponent" type="Node3D" parent="."]
+script = ExtResource("3_nswuu")

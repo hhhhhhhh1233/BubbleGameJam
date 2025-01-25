@@ -96,6 +96,7 @@ camera_forward={
 3d_physics/layer_2="Player"
 3d_physics/layer_3="Enemy"
 3d_physics/layer_4="enemy_bubble"
+3d_physics/layer_5="Sharp_Objects"
 
 [rendering]
 
