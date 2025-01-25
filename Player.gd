@@ -11,10 +11,13 @@ class_name Player
 
 @export var BubbledEnemyScene : PackedScene
 
-const camMin = -0.7
+const camMin = -1.1
 const camMax = 0.7
 const sensitivity = 0.03
+const sensitivityMouse = 0.01
 
+var lastMouse:Vector2
+	
 
 const SPEED = 8.0
 const JUMP_VELOCITY = 8.5
@@ -24,6 +27,7 @@ const JUMP_VELOCITY = 8.5
 
 func _ready() -> void:
 	#Input.mouse_mode = Input.MouseMode.MOUSE_MODE_CAPTURED;
+	lastMouse = get_viewport().get_mouse_position()
 	pass
 
 func _physics_process(delta: float) -> void:
@@ -63,15 +67,22 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 	var input_camera := Input.get_vector("camera_left", "camera_right", "camera_forward", "camera_back")
+	var deltaMouse = get_viewport().get_mouse_position() - lastMouse
+	lastMouse = get_viewport().get_mouse_position()
 	
 	if springArm.rotation.x-input_camera.y*sensitivity>camMin and springArm.rotation.x-input_camera.y*sensitivity<camMax:
 		#camera.rotation.x += -input_camera.y*sensitivity
 		springArm.rotation.x += -input_camera.y*sensitivity
 		
+	if springArm.rotation.x-deltaMouse.y*sensitivityMouse>camMin and springArm.rotation.x-deltaMouse.y*sensitivityMouse<camMax:
+		springArm.rotation.x += -deltaMouse.y*sensitivityMouse
+		
 	#rotation.y += -input_camera.x*sensitivity
 	#camera.rotate(Vector3(1,0,0), -input_camera.y*sensitivity)
 	#springArm.rotate(Vector3(1,0,0), -input_camera.y*sensitivity)
 	springArm.rotation.y += -input_camera.x*sensitivity
+	springArm.rotation.y += -deltaMouse.x*sensitivityMouse
+	
 	
 	if Input.is_action_just_pressed("light_attack"):
 		if not $Body/AnimationTree["parameters/attack/active"]:
