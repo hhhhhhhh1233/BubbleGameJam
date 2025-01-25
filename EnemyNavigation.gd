@@ -9,7 +9,7 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	self.target_position = Vector3(0,0,0)
-	print(target_position)
+	#print(target_position)
 	pass
 	
 func _physics_process(delta: float) -> void:
