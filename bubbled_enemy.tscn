@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://h4gr2mpgmstq"]
+[gd_scene load_steps=7 format=3 uid="uid://h4gr2mpgmstq"]
 
 [ext_resource type="Script" path="res://bubbled_enemy.gd" id="1_4afgl"]
+[ext_resource type="PackedScene" uid="uid://dvkk5iitfh6bd" path="res://Enemy.tscn" id="2_hhpa0"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_mbitp"]
 radius = 1.0
@@ -23,6 +24,7 @@ collision_mask = 15
 contact_monitor = true
 max_contacts_reported = 10
 script = ExtResource("1_4afgl")
+EnemyScene = ExtResource("2_hhpa0")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_mbitp")

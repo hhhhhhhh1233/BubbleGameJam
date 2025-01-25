@@ -12,8 +12,8 @@ const camMax = 0.7
 const sensitivity = 0.03
 
 
-const SPEED = 5.0
-const JUMP_VELOCITY = 4.5
+const SPEED = 8.0
+const JUMP_VELOCITY = 8.5
 
 #var bAttacking = false
 #var bLightAttack = false
@@ -62,10 +62,11 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("light_attack"):
 		for enemy in $Body/WeaponRoot/WeaponHitbox.get_overlapping_bodies():
 				var EnemyPosition = enemy.position
-				enemy.queue_free()
 				var BubbledEnemy = BubbledEnemyScene.instantiate()
-				BubbledEnemy.position = EnemyPosition
-				add_sibling(BubbledEnemy)
+				enemy.add_sibling(BubbledEnemy)
+				enemy.queue_free()
+				BubbledEnemy.initialize(EnemyPosition, 3)
+				#BubbledEnemy.position = EnemyPosition
 				#print(enemy)
 		#bAttacking = true
 		#bLightAttack = true

@@ -2,24 +2,33 @@ extends RigidBody3D
 @export var speed_exploding_threshold : float = 13.0
 @export var fatal_collision_angle : float = 0.5
 
+@export var EnemyScene : PackedScene
 
 var collision_normals : Array[Vector3]
 
+
 var last_velocity = Vector3()
+
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	pass # Replace with function body.
 
-
-
-
+func initialize(pos, unbubble_time):
+	position = pos
+	await get_tree().create_timer(unbubble_time).timeout
+	unbubble()
+	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
-	
-	
-	
 	last_velocity = linear_velocity
+	
 func exploded() -> void:
+	queue_free()
+	
+func unbubble() -> void:
+	var Enemy = EnemyScene.instantiate()
+	add_sibling(Enemy)
+	Enemy.position = position
 	queue_free()
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
