@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bdhl3wjtvr113"]
+[gd_scene load_steps=7 format=3 uid="uid://bdhl3wjtvr113"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_wc8xc"]
 
@@ -7,6 +7,9 @@
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_v5r2a"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qkne2"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_uotb2"]
+size = Vector3(0.439819, 0.40744, 2.7475)
 
 [sub_resource type="BoxMesh" id="BoxMesh_qpckj"]
 
@@ -26,6 +29,13 @@ mesh = SubResource("CapsuleMesh_v5r2a")
 [node name="WeaponModel" type="MeshInstance3D" parent="Body/WeaponRoot"]
 transform = Transform3D(0.401152, 0, 0, 0, 0.307252, 0, 0, 0, 2.42056, 0, 0, 1.6416)
 mesh = SubResource("BoxMesh_qkne2")
+
+[node name="WeaponHitbox" type="Area3D" parent="Body/WeaponRoot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.48117)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Body/WeaponRoot/WeaponHitbox"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0525513, 0.0188446, 0.0548401)
+shape = SubResource("BoxShape3D_uotb2")
 
 [node name="Head" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 0.299433, 0, 0, 0, 0.327416, 0, 0.516764, 0.399474)
