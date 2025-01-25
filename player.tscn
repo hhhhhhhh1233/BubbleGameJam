@@ -14,6 +14,8 @@ size = Vector3(0.439819, 0.40744, 2.7475)
 [sub_resource type="BoxMesh" id="BoxMesh_qpckj"]
 
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "springArm")]
+collision_layer = 2
+collision_mask = 5
 script = ExtResource("1_wc8xc")
 camera = NodePath("SpringArm3D/Camera3D")
 springArm = NodePath("SpringArm3D")
@@ -32,6 +34,8 @@ mesh = SubResource("BoxMesh_qkne2")
 
 [node name="WeaponHitbox" type="Area3D" parent="Body/WeaponRoot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1.48117)
+collision_layer = 0
+collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/WeaponRoot/WeaponHitbox"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0525513, 0.0188446, 0.0548401)
