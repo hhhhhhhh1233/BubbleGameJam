@@ -79,4 +79,11 @@ func _process(delta: float) -> void:
 	
 	pass
 
+func bubble():
+	var EnemyPosition = position
+	var BubbledEnemy = load("res://bubbled_enemy.tscn").instantiate()
+	add_sibling(BubbledEnemy)
+	BubbledEnemy.initialize(EnemyPosition, 3)
+	queue_free()
+
 #func _physics_process(delta: float) -> void:

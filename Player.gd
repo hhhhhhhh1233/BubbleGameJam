@@ -77,11 +77,12 @@ func _physics_process(delta: float) -> void:
 		if not $Body/AnimationTree["parameters/attack/active"]:
 			$Body/AnimationTree["parameters/attack/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 		for enemy in $Body/WeaponRoot/WeaponHitbox.get_overlapping_bodies():
-				var EnemyPosition = enemy.position
-				var BubbledEnemy = BubbledEnemyScene.instantiate()
-				enemy.add_sibling(BubbledEnemy)
-				enemy.queue_free()
-				BubbledEnemy.initialize(EnemyPosition, 3)
+			enemy.bubble()
+				#var EnemyPosition = enemy.position
+				#var BubbledEnemy = BubbledEnemyScene.instantiate()
+				#enemy.add_sibling(BubbledEnemy)
+				#enemy.queue_free()
+				#BubbledEnemy.initialize(EnemyPosition, 3)
 				#BubbledEnemy.position = EnemyPosition
 				#print(enemy)
 		#bAttacking = true
