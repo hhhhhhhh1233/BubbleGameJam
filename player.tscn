@@ -1,4 +1,4 @@
-[gd_scene load_steps=4 format=3 uid="uid://bdhl3wjtvr113"]
+[gd_scene load_steps=6 format=3 uid="uid://bdhl3wjtvr113"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_wc8xc"]
 
@@ -6,20 +6,34 @@
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_v5r2a"]
 
+[sub_resource type="BoxMesh" id="BoxMesh_qkne2"]
+
+[sub_resource type="BoxMesh" id="BoxMesh_qpckj"]
+
 [node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "springArm")]
 script = ExtResource("1_wc8xc")
-camera = NodePath("MeshInstance3D/SpringArm3D/Camera3D")
-springArm = NodePath("MeshInstance3D/SpringArm3D")
+camera = NodePath("SpringArm3D/Camera3D")
+springArm = NodePath("SpringArm3D")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_1m7lv")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Body" type="MeshInstance3D" parent="."]
 mesh = SubResource("CapsuleMesh_v5r2a")
 
-[node name="SpringArm3D" type="SpringArm3D" parent="MeshInstance3D"]
-transform = Transform3D(1, 0, 0, 0, 0.899115, 0.437712, 0, -0.437712, 0.899115, 0, 0.93131, 0.400328)
-spring_length = 2.0
+[node name="WeaponRoot" type="Node3D" parent="Body"]
 
-[node name="Camera3D" type="Camera3D" parent="MeshInstance3D/SpringArm3D"]
+[node name="WeaponModel" type="MeshInstance3D" parent="Body/WeaponRoot"]
+transform = Transform3D(0.401152, 0, 0, 0, 0.307252, 0, 0, 0, 2.42056, 0, 0, 1.6416)
+mesh = SubResource("BoxMesh_qkne2")
+
+[node name="Head" type="MeshInstance3D" parent="Body"]
+transform = Transform3D(1, 0, 0, 0, 0.299433, 0, 0, 0, 0.327416, 0, 0.516764, 0.399474)
+mesh = SubResource("BoxMesh_qpckj")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.899115, 0.437712, 0, -0.437712, 0.899115, 0, 0, 0)
+spring_length = 6.0
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 0.961799, -0.273757, 0, 0.273757, 0.961799, 0, 0.645698, 5.41997)
