@@ -1,11 +1,11 @@
 extends Node3D
 
 # Current wave
-var wave_count : int
+@export var wave_count : int
 # Number of enemies total to spawn this wave
 var total_wave_enemy_count : int
 # Number of enemies left to spawn in the current wave
-var enemies_left_to_spawn : int
+@export var enemies_left_to_spawn : int
 # Concurrent enemy spawns
 var concurrent_spawns : int
 # Time between waves
@@ -13,7 +13,7 @@ var wave_cooldown : float
 # Time between new enemy spawns
 var spawn_delay : float
 # Bool for if wave is undergoing
-var wave_ongoing : bool = false
+@export var wave_ongoing : bool = false
 
 @export var enemy_scene : PackedScene
 
@@ -29,7 +29,7 @@ func _ready() -> void:
 		if child is Marker3D:
 			enemy_spawnpoints.push_back(child)
 			print("Spawnpoint size", enemy_spawnpoints.size())
-	wave_count = 1
+	wave_count = 0
 	total_wave_enemy_count = 5
 	enemies_left_to_spawn = total_wave_enemy_count
 	spawn_delay = 5
@@ -39,15 +39,17 @@ func _ready() -> void:
 	enabled_spawnpoints.push_back(disabled_spawnpoints.pop_at(randi_range(0, disabled_spawnpoints.size() - 1)))
 	
 	await get_tree().create_timer(2.0).timeout
-	_spawn_enemy()
+	_begin_wave()
 	pass # Replace with function body.
 
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	#	print("Enemies left: ", ($enemies.get_child_count() + enemies_left_to_spawn))	
-	#end round if all enemies are dead
+	#end round if all enemies are dead and there ar no more left to spawn
 	if $enemies.get_child_count() == 0 && wave_ongoing && enemies_left_to_spawn == 0:
+		print("END!")
+		wave_ongoing = true
 		_end_wave()
 
 
@@ -68,12 +70,12 @@ func _spawn_enemy():
 					
 	for i in range(spawn_list.size()):
 		for spawn_count in range(1, spawn_list[i] + 1):
+			var enemy = enemy_scene.instantiate()
 			var spawn_pos = get_node(enabled_spawnpoints[i].get_child(0).get_child(0).get_path())
 			spawn_pos.progress_ratio = (float(spawn_count)/float(spawn_list[i]))
-			print(spawn_pos.progress_ratio)
-			var enemy = enemy_scene.instantiate()
+			print(spawn_pos.position, " : ", spawn_pos.progress_ratio)
 			$enemies.add_child(enemy)
-			enemy.global_position = spawn_pos.global_position + Vector3(0, 2, 0)
+			enemy.position = spawn_pos.position + Vector3(0, 2, 0)
 			enemies_left_to_spawn -= 1
 			
 			
@@ -85,13 +87,14 @@ func _spawn_enemy():
 
 func _begin_wave():
 	wave_count += 1
-	total_wave_enemy_count *= 1.2
-	enemies_left_to_spawn = total_wave_enemy_count
-	if wave_count % 2 == 0:
-		concurrent_spawns += 1
-	if wave_count % 3 == 0:
-		enabled_spawnpoints.push_back(disabled_spawnpoints.pop_at(randi_range(0, disabled_spawnpoints.size() - 1)))
-		spawn_delay *= 0.9
+	if wave_count > 1:
+		total_wave_enemy_count *= 1.2
+		enemies_left_to_spawn = total_wave_enemy_count
+		if wave_count % 2 == 0:
+			concurrent_spawns += 1
+		if wave_count % 3 == 0:
+			enabled_spawnpoints.push_back(disabled_spawnpoints.pop_at(randi_range(0, disabled_spawnpoints.size() - 1)))
+			spawn_delay *= 0.9
 	_spawn_enemy()
 	wave_ongoing = true
 
