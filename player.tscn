@@ -1,9 +1,12 @@
-[gd_scene load_steps=9 format=3 uid="uid://bdhl3wjtvr113"]
+[gd_scene load_steps=10 format=3 uid="uid://bdhl3wjtvr113"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_wc8xc"]
-[ext_resource type="PackedScene" uid="uid://d11k7524yknh6" path="res://3D/Rat/rat.tscn" id="2_ng3ok"]
+[ext_resource type="PackedScene" path="res://bubbled_enemy.tscn" id="2_b8svv"]
+[ext_resource type="Script" path="res://health_component.gd" id="2_elalu"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_1m7lv"]
+
+[sub_resource type="CapsuleMesh" id="CapsuleMesh_v5r2a"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_qkne2"]
 
@@ -11,81 +14,35 @@
 albedo_color = Color(0.964706, 0.160784, 0.211765, 1)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_uotb2"]
-size = Vector3(0.439819, 0.40744, 2.7475)
-
-[sub_resource type="CapsuleMesh" id="CapsuleMesh_v5r2a"]
+size = Vector3(3.39816, 1.5479, 2.7475)
 
 [sub_resource type="BoxMesh" id="BoxMesh_qpckj"]
 
-[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "springArm")]
+[node name="Player" type="CharacterBody3D" node_paths=PackedStringArray("camera", "springArm", "healthComponent")]
 collision_layer = 2
 collision_mask = 5
 script = ExtResource("1_wc8xc")
 camera = NodePath("SpringArm3D/Camera3D")
 springArm = NodePath("SpringArm3D")
+healthComponent = NodePath("HealthComponent")
+BubbledEnemyScene = ExtResource("2_b8svv")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_1m7lv")
 
-[node name="Body" parent="." instance=ExtResource("2_ng3ok")]
-transform = Transform3D(1.848, 0, 0, 0, 1.848, 0, 0, 0, 1.848, 0, 0, 0)
-
-[node name="Skeleton3D" parent="Body/RatSkeleton" index="0"]
-bones/0/position = Vector3(-0.793352, -0.0218182, -35.1144)
-bones/0/rotation = Quaternion(-0.707916, 0.0226106, -0.0208789, 0.705626)
-bones/1/rotation = Quaternion(-0.0238431, -0.0134896, -0.0013365, 0.999624)
-bones/2/rotation = Quaternion(-0.0334872, -0.00268529, 0.00513635, 0.999422)
-bones/3/rotation = Quaternion(-0.0334916, -0.00259219, 0.00517287, 0.999422)
-bones/4/rotation = Quaternion(0.00113851, -0.00267358, 0.0012679, 0.999995)
-bones/5/rotation = Quaternion(-0.0806915, -0.0637113, 0.0290885, 0.994276)
-bones/7/rotation = Quaternion(-0.592606, -0.404496, 0.609163, -0.337819)
-bones/8/rotation = Quaternion(0.372224, -0.395358, -0.218937, 0.810684)
-bones/9/rotation = Quaternion(0.0833598, -0.0112638, 0.0158596, 0.99633)
-bones/10/rotation = Quaternion(-0.00714712, 0.976737, -0.002416, -0.214308)
-bones/11/rotation = Quaternion(-0.274271, -0.230251, -0.00593202, 0.933662)
-bones/12/rotation = Quaternion(0.180449, -0.0099599, 0.114767, 0.976815)
-bones/13/rotation = Quaternion(-0.111354, -0.037485, -0.270913, 0.955406)
-bones/15/rotation = Quaternion(-0.141432, -0.0317221, 0.192935, 0.970447)
-bones/16/rotation = Quaternion(-0.127213, 0.0103505, 0.268703, 0.95473)
-bones/17/rotation = Quaternion(-0.0787935, -0.00468598, -0.00605327, 0.996862)
-bones/19/rotation = Quaternion(0.587218, -0.376449, 0.653727, 0.29343)
-bones/21/rotation = Quaternion(0.126583, 0.0107659, -0.0254794, 0.99157)
-bones/22/rotation = Quaternion(0.0456685, 0.950977, 0.0981389, 0.289698)
-bones/32/rotation = Quaternion(0.0789094, 0.0605068, 0.987519, -0.122142)
-bones/33/rotation = Quaternion(-0.323616, -0.38623, -0.0363681, 0.863004)
-bones/34/rotation = Quaternion(0.713151, 0.159928, -0.139685, 0.668077)
-bones/35/rotation = Quaternion(0.159906, 0.00570205, 0.0414067, 0.986247)
-bones/37/rotation = Quaternion(-0.101793, 0.0388547, 0.983719, 0.142917)
-bones/38/rotation = Quaternion(-0.326358, 0.384613, 0.0415897, 0.862458)
-bones/39/rotation = Quaternion(0.715375, -0.140148, 0.137478, 0.670594)
-bones/40/rotation = Quaternion(0.166339, 0.0031203, -0.0450154, 0.985036)
-bones/43/rotation = Quaternion(-0.143553, 0.103787, -0.120829, 0.97674)
-bones/44/rotation = Quaternion(0.0382032, 0.0615707, -0.0667655, 0.995134)
-bones/45/rotation = Quaternion(-0.0977958, 0.0452344, 0.0211392, 0.993953)
-bones/46/rotation = Quaternion(-0.193018, 0.110386, -0.00941178, 0.974921)
-bones/47/rotation = Quaternion(-0.287512, 0.0333731, -0.00824148, 0.95716)
-bones/48/rotation = Quaternion(-0.24656, -0.0185929, -0.0490439, 0.967707)
-bones/49/rotation = Quaternion(-0.28543, 0.0359309, 0.0881558, 0.95366)
-bones/50/rotation = Quaternion(-0.0227332, 0.0020025, 0.0951701, 0.995199)
-
-[node name="AnimationTree" parent="Body" index="2"]
-parameters/attack/active = false
-parameters/attack/internal_active = false
-parameters/attack/request = 0
-parameters/attack_rand/blend_amount = 0
-parameters/jump/active = false
-parameters/jump/internal_active = false
-parameters/jump/request = 0
-parameters/speed/blend_amount = -1.0
+[node name="Body" type="MeshInstance3D" parent="."]
+mesh = SubResource("CapsuleMesh_v5r2a")
 
 [node name="WeaponRoot" type="Node3D" parent="Body"]
 
 [node name="WeaponModel" type="MeshInstance3D" parent="Body/WeaponRoot"]
 transform = Transform3D(0.401152, 0, 0, 0, 0.307252, 0, 0, 0, 2.42056, 0, 0, 1.6416)
+visible = false
 mesh = SubResource("BoxMesh_qkne2")
 
 [node name="HeavyWeaponModel" type="MeshInstance3D" parent="Body/WeaponRoot"]
 transform = Transform3D(0.401152, 0, 0, 0, 0.307252, 0, 0, 0, 2.42056, 0, 0, 1.6416)
+visible = false
 mesh = SubResource("BoxMesh_qkne2")
 surface_material_override/0 = SubResource("StandardMaterial3D_817gi")
 
@@ -95,7 +52,7 @@ collision_layer = 0
 collision_mask = 4
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/WeaponRoot/WeaponHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0525513, 0.0188446, 0.0548401)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.259739, 0)
 shape = SubResource("BoxShape3D_uotb2")
 
 [node name="HeavyWeaponHitbox" type="Area3D" parent="Body/WeaponRoot"]
@@ -104,14 +61,9 @@ collision_layer = 0
 collision_mask = 12
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="Body/WeaponRoot/HeavyWeaponHitbox"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0525513, 0.0188446, 0.0548401)
 shape = SubResource("BoxShape3D_uotb2")
 
-[node name="Body(depricated)" type="MeshInstance3D" parent="."]
-visible = false
-mesh = SubResource("CapsuleMesh_v5r2a")
-
-[node name="Head" type="MeshInstance3D" parent="Body(depricated)"]
+[node name="Head" type="MeshInstance3D" parent="Body"]
 transform = Transform3D(1, 0, 0, 0, 0.299433, 0, 0, 0, 0.327416, 0, 0.516764, 0.399474)
 mesh = SubResource("BoxMesh_qpckj")
 
@@ -122,4 +74,5 @@ spring_length = 6.0
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 0.961799, -0.273757, 0, 0.273757, 0.961799, 0, 0.645698, 5.41997)
 
-[editable path="Body"]
+[node name="HealthComponent" type="Node3D" parent="."]
+script = ExtResource("2_elalu")
