@@ -38,7 +38,7 @@ func unbubble() -> void:
 
 func _integrate_forces(state: PhysicsDirectBodyState3D) -> void:
 	for i in state.get_contact_count():
-		if state.get_contact_collider_object(i).get_collision_layer_value(5):
+		if state.get_contact_collider_object(i).get_collision_layer_value(5) and linear_velocity.length() > 10:
 			#print("Hit something hard!")
 			exploded()
 		#print(linear_velocity.project(state.get_contact_local_normal(i)).length())
