@@ -31,6 +31,8 @@ func _ready() -> void:
 	pass
 
 func _physics_process(delta: float) -> void:
+	if Input.is_action_just_pressed("quit_game"):
+		get_tree().quit()
 	if healthComponent.health <= 0:
 		return
 	# Add the gravity.
