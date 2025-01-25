@@ -15,6 +15,7 @@ const camMin = -1.1
 const camMax = 0.7
 const sensitivity = 0.06
 const sensitivityMouse = 0.01
+const character_rotation_speed = 0.2
 
 var lastMouse:Vector2
 	
@@ -56,7 +57,14 @@ func _physics_process(delta: float) -> void:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
 		$Body.look_at(position - Vector3(direction.x, 0, direction.z))
-		
+		#var target = ($Body.position - Vector3(direction.x, 0, direction.z))
+		#$Body.transform.basis.slerp(look_dir.basis, 0.2)
+		#var T=$Body.global_transform.looking_at(target.global_transform.origin, Vector3(0,1,0))
+		#$Body.global_transform.basis.y=lerp($Body.global_transform.basis.y, T.basis.y, delta*character_rotation_speed)
+		#$Body.global_transform.basis.x=lerp($Body.global_transform.basis.x, T.basis.x, delta*character_rotation_speed)
+		#$Body.global_transform.basis.z=lerp($Body.global_transform.basis.z, T.basis.z, delta*character_rotation_speed)
+		#$Body.look_at(look_dir)
+	
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
