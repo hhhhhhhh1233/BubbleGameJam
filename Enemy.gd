@@ -7,7 +7,7 @@ var direction : Vector3
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
 var overlappingBodies : Array[Node3D]
 @export var hitrange = 5
-@export var hitvisualizer : MeshInstance3D
+#@export var hitvisualizer : MeshInstance3D
 
 var whackDelay = 0.3
 var whackCooldown = 1
@@ -22,15 +22,15 @@ var playerToWhack:Player
 # Called when the node enters the scene tree for the first time.
 func _ready() -> void:
 	whackLast = Time.get_unix_time_from_system()
-	hitvisualizer.position=Vector3(0,0,0)
-	hitvisualizer.scale=Vector3(hitrange, hitrange, hitrange)
+	#hitvisualizer.position=Vector3(0,0,0)
+	#hitvisualizer.scale=Vector3(hitrange, hitrange, hitrange)
 	pass # Replace with function body.
 
 func whack(player: Player)->void:
 	canWhack=false
 	$Body/AnimationTree["parameters/attack/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 	whackLast = Time.get_unix_time_from_system()
-	hitvisualizer.visible=true
+	#hitvisualizer.visible=true
 	if playerHealthComponent == null:
 		for child in player.get_children():
 			if child is HealthComponent:
@@ -50,7 +50,7 @@ func _process(delta: float) -> void:
 			whacking=false
 		return
 	
-	hitvisualizer.visible=false
+	#hitvisualizer.visible=false
 	pos = get_global_transform().basis
 	$Body.look_at($Body.global_position - Vector3(direction.x, 0, direction.z))
 	overlappingBodies = aggroCollision.get_overlapping_bodies()
