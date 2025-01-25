@@ -52,7 +52,6 @@ func _physics_process(delta: float) -> void:
 		#camera.rotation.x += -input_camera.y*sensitivity
 		springArm.rotation.x += -input_camera.y*sensitivity
 		
-	print(springArm.rotation.x)
 	#rotation.y += -input_camera.x*sensitivity
 	#camera.rotate(Vector3(1,0,0), -input_camera.y*sensitivity)
 	#springArm.rotate(Vector3(1,0,0), -input_camera.y*sensitivity)
@@ -64,8 +63,11 @@ func _physics_process(delta: float) -> void:
 		$Body/WeaponRoot.rotation = Vector3(0, -PI/2, 0)
 		
 	if bAttacking:
+		for enemy in $Body/WeaponRoot/WeaponHitbox.get_overlapping_bodies():
+			print(enemy)
+		
 		$Body/WeaponRoot.rotate_y(0.2)
 		if $Body/WeaponRoot.rotation.y > PI/2:
-			bAttacking = true
+			bAttacking = false
 			$Body/WeaponRoot/WeaponModel.hide()
 	
