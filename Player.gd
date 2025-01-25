@@ -76,10 +76,18 @@ func _physics_process(delta: float) -> void:
 				print(enemy)
 		else:
 			for enemy in $Body/WeaponRoot/HeavyWeaponHitbox.get_overlapping_bodies():
+				hitstop(0.01,0.5)
 				print(enemy)
 		
-		$Body/WeaponRoot.rotate_y(0.2)
+		$Body/WeaponRoot.rotate_y(40 * delta)
 		if $Body/WeaponRoot.rotation.y > PI/2:
 			bAttacking = false
 			$Body/WeaponRoot/WeaponModel.hide()
 			$Body/WeaponRoot/HeavyWeaponModel.hide()
+			
+func hitstop (timeScale : float, duration : float):
+	Engine.time_scale = timeScale
+	await get_tree().create_timer(duration,true,false,true).timeout
+	Engine.time_scale = 1.0
+	
+	
