@@ -13,6 +13,8 @@ var whackDelay = 0.3
 var whackCooldown = 1
 var whackDamage = 20
 var canWhack:bool
+var soapiness = 0.0
+var maxSoapiness = 1.0
 var whacking:bool
 var whackLast:float
 var whackStart:float
@@ -80,6 +82,14 @@ func _process(delta: float) -> void:
 		canWhack=true
 	
 	pass
+
+func get_soaped(deltaSoap : float):
+	soapiness = soapiness + deltaSoap
+	
+	if soapiness >= maxSoapiness:
+		soapiness = maxSoapiness
+		bubble()
+	$GPUParticles3D.amount_ratio = soapiness
 
 func bubble():
 	var EnemyPosition = position

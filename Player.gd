@@ -19,6 +19,7 @@ const character_rotation_speed = 0.2
 
 var lastMouse:Vector2
 	
+var soapDamage = 0.25
 
 const SPEED = 10.0
 const JUMP_VELOCITY = 12
@@ -98,7 +99,7 @@ func _physics_process(delta: float) -> void:
 		if not $Body/AnimationTree["parameters/attack/active"]:
 			$Body/AnimationTree["parameters/attack/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 		for enemy in $Body/WeaponRoot/WeaponHitbox.get_overlapping_bodies():
-			enemy.bubble()
+			enemy.get_soaped(soapDamage)
 				#var EnemyPosition = enemy.position
 				#var BubbledEnemy = BubbledEnemyScene.instantiate()
 				#enemy.add_sibling(BubbledEnemy)

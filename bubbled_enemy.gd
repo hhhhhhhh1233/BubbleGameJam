@@ -8,6 +8,8 @@ extends RigidBody3D
 var collision_normals : Array[Vector3]
 
 
+
+
 var last_velocity = Vector3()
 
 # Called when the node enters the scene tree for the first time.
