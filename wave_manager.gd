@@ -31,7 +31,7 @@ func _ready() -> void:
 	for child in $spawnpoints.get_children():
 		if child is Marker3D:
 			enemy_spawnpoints.push_back(child)
-			print("Spawnpoint size", enemy_spawnpoints.size())
+			#print("Spawnpoint size", enemy_spawnpoints.size())
 	# Assign starting wave values
 	wave_count = 0
 	total_wave_enemy_count = 5
@@ -78,7 +78,7 @@ func _spawn_enemy():
 			var enemy = enemy_scene.instantiate()
 			var spawn_pos_progress = 2*PI*(float(spawn_count)/float(spawn_list[i]))
 			var spawn_pos_offset = Vector3(cos(spawn_pos_progress)*spawn_radius, 1.5, sin(spawn_pos_progress)*spawn_radius)
-			print(enabled_spawnpoints[i].global_position + spawn_pos_offset)
+			#print(enabled_spawnpoints[i].global_position + spawn_pos_offset)
 			$enemies.add_child(enemy)
 			enemy.global_position = enabled_spawnpoints[i].global_position + spawn_pos_offset
 			#enemies_left_to_spawn -= 1
@@ -101,8 +101,8 @@ func _begin_wave():
 		if wave_count % 3 == 0:
 			enabled_spawnpoints.push_back(disabled_spawnpoints.pop_at(randi_range(0, disabled_spawnpoints.size() - 1)))
 			spawn_delay *= 0.9
-	print("WAVE: ", wave_count)
-	print("ENEMIES INCOMING: ", enemies_left_to_spawn)
+	#print("WAVE: ", wave_count)
+	#print("ENEMIES INCOMING: ", enemies_left_to_spawn)
 	_spawn_enemy()
 	wave_ongoing = true
 
