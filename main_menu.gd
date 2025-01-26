@@ -18,7 +18,7 @@ func _ready() -> void:
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
-	pivot.rotation += 0.1*delta
+	pivot.rotation -= 0.2*delta
 	if startButton.is_hovered() or startButton.has_focus():
 		startButtonFocus.visible=true
 		if Input.is_action_pressed("Accept"):
