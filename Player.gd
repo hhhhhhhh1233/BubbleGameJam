@@ -36,8 +36,8 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("quit_game"):
 		get_tree().quit()
 	if healthComponent.health <= 0:
-		if Input.is_action_just_pressed("restart"):
-			get_tree().reload_current_scene()
+		#if Input.is_action_just_pressed("restart"):
+			#get_tree().reload_current_scene()
 			
 		return
 	# Add the gravity.
@@ -105,17 +105,6 @@ func _physics_process(delta: float) -> void:
 			$Body/AnimationTree["parameters/attack/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 		for enemy in $Body/WeaponRoot/WeaponHitbox.get_overlapping_bodies():
 			enemy.get_soaped(soapDamage)
-				#var EnemyPosition = enemy.position
-				#var BubbledEnemy = BubbledEnemyScene.instantiate()
-				#enemy.add_sibling(BubbledEnemy)
-				#enemy.queue_free()
-				#BubbledEnemy.initialize(EnemyPosition, 3)
-				#BubbledEnemy.position = EnemyPosition
-				#print(enemy)
-		#bAttacking = true
-		#bLightAttack = true
-		#$Body/WeaponRoot/WeaponModel.show()
-		#$Body/WeaponRoot.rotation = Vector3(0, -PI/2, 0)
 		
 	if Input.is_action_just_pressed("heavy_attack"):
 		if !$AttackSound.playing:
@@ -130,10 +119,11 @@ func _physics_process(delta: float) -> void:
 					var hit_direction = (enemy.global_position - global_position).normalized()
 					enemy.linear_velocity = Vector3()
 					enemy.apply_central_impulse(hit_direction * bubbleHitForceMultiplier )
-					#print(enemy)
+					enemy.unbubble_timer.stop()
+					enemy.unbubble_timer.start(15)
 			
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and healthComponent.health>0:
 		if springArm.rotation.x-event.relative.y*sensitivityMouse>camMin and springArm.rotation.x-event.relative.y*sensitivityMouse<camMax:
 			springArm.rotation.x += -event.relative.y*sensitivityMouse
 		springArm.rotation.y += -event.relative.x*sensitivityMouse

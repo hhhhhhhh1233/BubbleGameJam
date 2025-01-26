@@ -4,6 +4,7 @@ extends RigidBody3D
 
 @export var EnemyScene : PackedScene
 @export var poppedScene : PackedScene
+@export var unbubble_timer : Timer
 
 var collision_normals : Array[Vector3]
 
@@ -18,9 +19,8 @@ func _ready() -> void:
 
 func initialize(pos, unbubble_time):
 	position = pos
+	unbubble_timer.start(unbubble_time)
 	$GetBubbledSound.play()
-	await get_tree().create_timer(unbubble_time).timeout
-	unbubble()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
@@ -70,3 +70,8 @@ func _killzoned() -> void:
 	add_sibling(pop)
 	pop.position = position
 	queue_free()
+
+
+func _on_unbubble_timer_timeout() -> void:
+	unbubble()
+	pass # Replace with function body.
