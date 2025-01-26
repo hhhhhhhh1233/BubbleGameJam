@@ -31,12 +31,15 @@ func exploded() -> void:
 	add_sibling(pop)
 	pop.position = position
 	for enemy in $EnemyDetector.get_overlapping_bodies():
-		
-		#print("So much soapinesssd: ", (enemy.position - position).length() / 30)
 		var detection_radius = 8
 		var soapiness_ratio = (detection_radius - (enemy.position - position).length()) / detection_radius
 		enemy.get_soaped(soapiness_ratio)
-	
+		
+	for bubbledEnemy in $BubbledEnemyDetector.get_overlapping_bodies():
+		var detection_radius = 8
+		var to_enemy = (bubbledEnemy.position - position) / detection_radius
+		bubbledEnemy.apply_central_impulse(to_enemy * 4)
+		
 	queue_free()
 	
 func unbubble() -> void:
