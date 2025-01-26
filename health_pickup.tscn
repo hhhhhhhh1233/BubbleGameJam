@@ -1,13 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://byowxnm7kip3m"]
+[gd_scene load_steps=5 format=3 uid="uid://blvnc5nd1vfws"]
 
 [ext_resource type="Script" path="res://health_pickup.gd" id="1_iqsj6"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_r2vrd"]
-transparency = 1
-albedo_color = Color(0, 1, 0.433333, 0.635294)
-
-[sub_resource type="BoxMesh" id="BoxMesh_2tvsu"]
-material = SubResource("StandardMaterial3D_r2vrd")
+[ext_resource type="PackedScene" uid="uid://6dm1nif6vmq1" path="res://3D/cheese.glb" id="2_vice4"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_yajna"]
 radius = 1.5
@@ -22,8 +16,8 @@ contact_monitor = true
 max_contacts_reported = 1
 script = ExtResource("1_iqsj6")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-mesh = SubResource("BoxMesh_2tvsu")
+[node name="cheese2" parent="." instance=ExtResource("2_vice4")]
+transform = Transform3D(1.045, -1.70528, 0, 1.70444, 1.04448, 0.0628215, -0.0535642, -0.0328242, 1.99901, 0, 0.294454, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("SphereShape3D_yajna")
