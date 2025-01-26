@@ -107,8 +107,6 @@ func _physics_process(delta: float) -> void:
 			enemy.get_soaped(soapDamage)
 		
 	if Input.is_action_just_pressed("heavy_attack"):
-		if !$AttackSound.playing:
-			$AttackSound.play()
 		if not $Body/AnimationTree["parameters/kick/active"]:
 			$Body/AnimationTree["parameters/kick/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 			
@@ -116,6 +114,8 @@ func _physics_process(delta: float) -> void:
 				
 				if enemy.get_collision_layer_value(4):
 					hitstop(hitstopScale,hitstopDuration)
+					if !$KickSound.playing:
+						$KickSound.play()
 					var hit_direction = (enemy.global_position - global_position).normalized()
 					enemy.linear_velocity = Vector3()
 					enemy.apply_central_impulse(hit_direction * bubbleHitForceMultiplier )
