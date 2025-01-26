@@ -1,0 +1,18 @@
+[gd_scene load_steps=3 format=3 uid="uid://bl62ckx5fjjs5"]
+
+[ext_resource type="PackedScene" uid="uid://bomsmkv52elto" path="res://3D/Damager/cactus.glb" id="1_pk4ij"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_fu0c1"]
+radius = 1.55263
+height = 6.66834
+
+[node name="Cactus" type="StaticBody3D"]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.277721, 0)
+shape = SubResource("CapsuleShape3D_fu0c1")
+
+[node name="cactus" parent="." instance=ExtResource("1_pk4ij")]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -0.0395191, -0.176469, -0.0640177)
