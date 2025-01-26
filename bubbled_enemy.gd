@@ -18,6 +18,7 @@ func _ready() -> void:
 
 func initialize(pos, unbubble_time):
 	position = pos
+	$GetBubbledSound.play()
 	await get_tree().create_timer(unbubble_time).timeout
 	unbubble()
 	
