@@ -36,6 +36,9 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("quit_game"):
 		get_tree().quit()
 	if healthComponent.health <= 0:
+		if Input.is_action_just_pressed("restart"):
+			get_tree().reload_current_scene()
+			
 		return
 	# Add the gravity.
 	if not is_on_floor():
