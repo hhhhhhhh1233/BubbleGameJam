@@ -48,6 +48,10 @@ func whack(player: Player)->void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	
+	if !is_on_floor():
+		velocity += get_gravity() * delta
+		move_and_slide()
+		return
 	if whacking:
 		if Time.get_unix_time_from_system() >= whackStart + whackDelay:
 			whack(playerToWhack)
