@@ -26,3 +26,5 @@ draw_pass_1 = SubResource("SphereMesh_3ew8l")
 script = ExtResource("2_frtlx")
 
 [node name="Node3D" type="Node3D" parent="."]
+
+[node name="BubblePopSound" type="AudioStreamPlayer3D" parent="."]

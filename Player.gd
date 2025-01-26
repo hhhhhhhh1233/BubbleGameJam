@@ -133,3 +133,7 @@ func hitstop (timeScale : float, duration : float):
 	
 	
 	
+
+
+func _on_health_component_health_depleted() -> void:
+	$Body/AnimationTree["parameters/dead/blend_amount"] = 1
