@@ -30,6 +30,7 @@ func _ready() -> void:
 	pass # Replace with function body.
 
 func whack(player: Player)->void:
+	$AttackSound.play()
 	canWhack=false
 	$Body/AnimationTree["parameters/attack/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 	whackLast = Time.get_unix_time_from_system()
@@ -77,6 +78,9 @@ func _process(delta: float) -> void:
 	if $Body.global_position != $Body.global_position - Vector3(direction.x, 0, direction.z):
 		$Body.look_at($Body.global_position - Vector3(direction.x, 0, direction.z))
 	$Body/AnimationTree["parameters/speed/blend_amount"] = min(velocity.length(),1)
+	if !$walkSound.playing:
+		$walkSound.play()
+	
 	move_and_slide()
 	
 	if Time.get_unix_time_from_system() - whackLast > whackCooldown:
