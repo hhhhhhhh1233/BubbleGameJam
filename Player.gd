@@ -11,7 +11,7 @@ class_name Player
 
 @export var BubbledEnemyScene : PackedScene
 
-const camMin = -1.1
+const camMin = -1.4
 const camMax = 0.7
 const sensitivity = 0.06
 const sensitivityMouse = 0.01
@@ -28,7 +28,7 @@ const JUMP_VELOCITY = 12
 #var bLightAttack = false
 
 func _ready() -> void:
-	#Input.mouse_mode = Input.MouseMode.MOUSE_MODE_CAPTURED;
+	Input.mouse_mode = Input.MouseMode.MOUSE_MODE_CAPTURED
 	lastMouse = get_viewport().get_mouse_position()
 	pass
 
@@ -52,7 +52,10 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = JUMP_VELOCITY
 		$Body/AnimationTree["parameters/jump/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
-
+	var input_camera := Input.get_vector("camera_left", "camera_right", "camera_forward", "camera_back")
+	if springArm.rotation.x-input_camera.y*sensitivity>camMin and springArm.rotation.x-input_camera.y*sensitivity<camMax:
+		springArm.rotation.x += -input_camera.y*sensitivity
+	springArm.rotation.y += -input_camera.x*sensitivity
 	# Get the input direction and handle the movement/deceleration.
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("left", "right", "forward", "back")
@@ -60,7 +63,8 @@ func _physics_process(delta: float) -> void:
 	if direction:
 		velocity.x = direction.x * SPEED
 		velocity.z = direction.z * SPEED
-		$Body.look_at(position - Vector3(direction.x, 0, direction.z))
+		$Body.rotation.y = lerp_angle($Body.rotation.y - PI/2, atan2(-direction.z, direction.x), 10 * delta) + PI/2
+		#$Body.look_at(position - Vector3(direction.x, 0, direction.z))
 		#var target = ($Body.position - Vector3(direction.x, 0, direction.z))
 		#$Body.transform.basis.slerp(look_dir.basis, 0.2)
 		#var T=$Body.global_transform.looking_at(target.global_transform.origin, Vector3(0,1,0))
@@ -80,23 +84,7 @@ func _physics_process(delta: float) -> void:
 	$Body/AnimationTree["parameters/speed/blend_amount"] = lerpf(-1,1,direction.length())
 	move_and_slide()
 
-	var input_camera := Input.get_vector("camera_left", "camera_right", "camera_forward", "camera_back")
-	var deltaMouse = get_viewport().get_mouse_position() - lastMouse
-	lastMouse = get_viewport().get_mouse_position()
-	
-	if springArm.rotation.x-input_camera.y*sensitivity>camMin and springArm.rotation.x-input_camera.y*sensitivity<camMax:
-		#camera.rotation.x += -input_camera.y*sensitivity
-		springArm.rotation.x += -input_camera.y*sensitivity
-		
-	if springArm.rotation.x-deltaMouse.y*sensitivityMouse>camMin and springArm.rotation.x-deltaMouse.y*sensitivityMouse<camMax:
-		springArm.rotation.x += -deltaMouse.y*sensitivityMouse
-		
-	#rotation.y += -input_camera.x*sensitivity
-	#camera.rotate(Vector3(1,0,0), -input_camera.y*sensitivity)
-	#springArm.rotate(Vector3(1,0,0), -input_camera.y*sensitivity)
-	springArm.rotation.y += -input_camera.x*sensitivity
-	springArm.rotation.y += -deltaMouse.x*sensitivityMouse
-	
+
 	
 	if Input.is_action_just_pressed("light_attack"):
 		if not $Body/AnimationTree["parameters/attack/active"]:
@@ -126,36 +114,14 @@ func _physics_process(delta: float) -> void:
 					var hit_direction = (enemy.global_position - global_position).normalized()
 					enemy.linear_velocity = Vector3()
 					enemy.apply_central_impulse(hit_direction * bubbleHitForceMultiplier )
-					print(enemy)
-		#bAttacking = true
-		#bLightAttack = false
-		#$Body/WeaponRoot/HeavyWeaponModel.show()
-		#$Body/WeaponRoot.rotation = Vector3(0, -PI/2, 0)
-		
-	#if bAttacking:
-		#if bLightAttack:
-			#for enemy in $Body/WeaponRoot/WeaponHitbox.get_overlapping_bodies():
-				#var EnemyPosition = enemy.position
-				#enemy.queue_free()
-				#var BubbledEnemy = BubbledEnemyScene.instantiate()
-				#BubbledEnemy.position = EnemyPosition
-				#add_sibling(BubbledEnemy)
-				##print(enemy)
-		#else:
-			#for enemy in $Body/WeaponRoot/HeavyWeaponHitbox.get_overlapping_bodies():
-				#print("yep")
-				#if enemy.get_collision_layer_value(4):
-					#hitstop(0.01,0.5)
-					#var hit_direction = (enemy.global_position - global_position).normalized()
-					#enemy.apply_central_impulse(hit_direction * bubbleHitForceMultiplier )
 					#print(enemy)
-		#
-		#$Body/WeaponRoot.rotate_y(40 * delta)
-		#if $Body/WeaponRoot.rotation.y > PI/2:
-			#bAttacking = false
-			#$Body/WeaponRoot/WeaponModel.hide()
-			#$Body/WeaponRoot/HeavyWeaponModel.hide()
 			
+func _input(event: InputEvent) -> void:
+	if event is InputEventMouseMotion:
+		if springArm.rotation.x-event.relative.y*sensitivityMouse>camMin and springArm.rotation.x-event.relative.y*sensitivityMouse<camMax:
+			springArm.rotation.x += -event.relative.y*sensitivityMouse
+		springArm.rotation.y += -event.relative.x*sensitivityMouse
+	
 func hitstop (timeScale : float, duration : float):
 	Engine.time_scale =  timeScale
 	$Body/AnimationTree["parameters/kick_time/scale"] = 1/ hitstopScale
