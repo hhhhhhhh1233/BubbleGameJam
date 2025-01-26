@@ -20,5 +20,5 @@ func _process(delta: float) -> void:
 	health.text = "Health:" + str(healthComponent.health) + "%"
 	currentWave.text = "Current wave: " + str(WaveInformation.WaveCount)
 	if healthComponent.health <= 0:
-		urDeadBro.text = "UR DEAD BRO"
+		urDeadBro.text = "You died\nYou got to wave " + str(WaveInformation.WaveCount) + "\nPress A/X/Enter to restart"
 	pass
