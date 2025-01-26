@@ -2,16 +2,17 @@ extends CharacterBody3D
 var pos : Basis
 var speed : float = 7
 var accel : float = 5
-var direction : Vector3
+var direction : Vector3 = Vector3(1,0,1)
 @export var aggroCollision : Area3D
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
 var overlappingBodies : Array[Node3D]
 @export var hitrange = 5
+@export var poppedScene : PackedScene
 #@export var hitvisualizer : MeshInstance3D
 
 var whackDelay = 0.3
 var whackCooldown = 1
-var whackDamage = 20
+var whackDamage = 5
 var canWhack:bool
 var soapiness = 0.0
 var maxSoapiness = 1.0
@@ -53,11 +54,10 @@ func _process(delta: float) -> void:
 		return
 	
 	#hitvisualizer.visible=false
-	pos = get_global_transform().basis
-	$Body.look_at($Body.global_position - Vector3(direction.x, 0, direction.z))
+	#pos = get_global_transform().basis
 	overlappingBodies = aggroCollision.get_overlapping_bodies()
 	if overlappingBodies.size() != 0:
-		
+			
 		if (overlappingBodies[0].global_position - global_position).length()<hitrange*0.5 :
 			direction = nav.get_next_path_position() - global_position
 			direction = direction.normalized()
@@ -75,6 +75,9 @@ func _process(delta: float) -> void:
 		else:
 			velocity = velocity.lerp(direction * speed, accel * delta)
 		
+	else:
+		direction = Vector3(randf_range(0.1,1), 0, randf_range(0.1,1))
+	$Body.look_at($Body.global_position - Vector3(direction.x, 0, direction.z))
 	$Body/AnimationTree["parameters/speed/blend_amount"] = min(velocity.length(),1)
 	move_and_slide()
 	
@@ -96,6 +99,12 @@ func bubble():
 	var BubbledEnemy = load("res://bubbled_enemy.tscn").instantiate()
 	add_sibling(BubbledEnemy)
 	BubbledEnemy.initialize(EnemyPosition, 3)
+	queue_free()
+	
+func _killzoned() -> void:
+	var pop = poppedScene.instantiate()
+	add_sibling(pop)
+	pop.position = position
 	queue_free()
 
 #func _physics_process(delta: float) -> void:

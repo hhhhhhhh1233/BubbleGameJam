@@ -54,3 +54,8 @@ func hit_stop(time_scale : float,duration: float):
 	await get_tree().create_timer(duration,true,false,true).timeout
 	Engine.time_scale = 1
 	
+func _killzoned() -> void:
+	var pop = poppedScene.instantiate()
+	add_sibling(pop)
+	pop.position = position
+	queue_free()
