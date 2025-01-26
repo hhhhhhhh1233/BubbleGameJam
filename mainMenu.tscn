@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://dgofsthepc6ao"]
+[gd_scene load_steps=8 format=3 uid="uid://dgofsthepc6ao"]
 
 [ext_resource type="Script" path="res://main_menu.gd" id="1_2s8ak"]
 [ext_resource type="Texture2D" uid="uid://b0k1d6hrand8r" path="res://2D/Menu/Play.png" id="2_326wj"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dx7gyh3jr4pvc" path="res://2D/Menu/MenuButtonSelect.png" id="3_tisrf"]
 [ext_resource type="Texture2D" uid="uid://b7uavfafxfygr" path="res://2D/Menu/LogoNotText.png" id="4_05qhx"]
 [ext_resource type="Texture2D" uid="uid://dgrch0tswkjs2" path="res://2D/Menu/LogoText.png" id="5_2fwjc"]
+[ext_resource type="AudioStream" uid="uid://csrff3n73nysn" path="res://Audio/MenuMusic.wav" id="7_1vu0f"]
 
 [node name="MainMenu" type="Control"]
 layout_mode = 3
@@ -104,3 +105,7 @@ offset_bottom = 492.0
 grow_horizontal = 0
 grow_vertical = 2
 texture = ExtResource("5_2fwjc")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_1vu0f")
+autoplay = true
