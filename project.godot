@@ -19,6 +19,12 @@ config/icon="res://Icon.png"
 
 WaveInformation="*res://wave_information.gd"
 
+[display]
+
+window/size/viewport_width=1920
+window/size/viewport_height=1080
+window/size/mode=3
+
 [input]
 
 forward={
