@@ -28,7 +28,7 @@ func _process(delta: float) -> void:
 		queue_free()
 func _drop_heal():
 	var pickup = Health_pickup.instantiate()
-	add_sibling(pickup)
+	get_node("../").add_sibling(pickup)
 	pickup.global_position = global_position
 	await $BubblePopSound.finished
 	queue_free()
