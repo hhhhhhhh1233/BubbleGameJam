@@ -36,8 +36,8 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("quit_game"):
 		get_tree().quit()
 	if healthComponent.health <= 0:
-		if Input.is_action_just_pressed("restart"):
-			get_tree().reload_current_scene()
+		#if Input.is_action_just_pressed("restart"):
+			#get_tree().reload_current_scene()
 			
 		return
 	# Add the gravity.
@@ -67,6 +67,15 @@ func _physics_process(delta: float) -> void:
 		velocity.x = run_direction.x * SPEED
 		velocity.z = run_direction.z * SPEED
 		$Body.rotation.y = lerp_angle($Body.rotation.y - PI/2, atan2(-direction.z, direction.x), 10 * delta) + PI/2
+		
+		if is_on_floor() :
+			$WalkSound.pitch_scale = direction.length()
+			if !$WalkSound.playing:
+				$WalkSound.play()
+		else:
+			$WalkSound.stop()
+			
+			
 		#$Body.look_at(position - Vector3(direction.x, 0, direction.z))
 		#var target = ($Body.position - Vector3(direction.x, 0, direction.z))
 		#$Body.transform.basis.slerp(look_dir.basis, 0.2)
@@ -79,7 +88,7 @@ func _physics_process(delta: float) -> void:
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
-		
+		$WalkSound.stop()
 	
 		
 		
@@ -90,12 +99,16 @@ func _physics_process(delta: float) -> void:
 
 	
 	if Input.is_action_just_pressed("light_attack"):
+		if !$AttackSound.playing:
+			$AttackSound.play()
 		if not $Body/AnimationTree["parameters/attack/active"]:
 			$Body/AnimationTree["parameters/attack/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 		for enemy in $Body/WeaponRoot/WeaponHitbox.get_overlapping_bodies():
 			enemy.get_soaped(soapDamage)
 		
 	if Input.is_action_just_pressed("heavy_attack"):
+		if !$AttackSound.playing:
+			$AttackSound.play()
 		if not $Body/AnimationTree["parameters/kick/active"]:
 			$Body/AnimationTree["parameters/kick/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 			
@@ -110,7 +123,7 @@ func _physics_process(delta: float) -> void:
 					enemy.unbubble_timer.start(15)
 			
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and healthComponent.health>0:
 		if springArm.rotation.x-event.relative.y*sensitivityMouse>camMin and springArm.rotation.x-event.relative.y*sensitivityMouse<camMax:
 			springArm.rotation.x += -event.relative.y*sensitivityMouse
 		springArm.rotation.y += -event.relative.x*sensitivityMouse
@@ -130,3 +143,11 @@ func hitstop (timeScale : float, duration : float):
 
 func _on_health_component_health_depleted() -> void:
 	$Body/AnimationTree["parameters/dead/blend_amount"] = 1
+
+
+func _on_health_component_damage_taken() -> void:
+	$HurtSound.play()
+
+
+func _on_health_component_health_restore() -> void:
+	$HealSound.play()

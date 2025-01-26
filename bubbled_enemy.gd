@@ -19,9 +19,8 @@ func _ready() -> void:
 
 func initialize(pos, unbubble_time):
 	position = pos
-	#await get_tree().create_timer(unbubble_time).timeout
-	#unbubble()
 	unbubble_timer.start(unbubble_time)
+	$GetBubbledSound.play()
 	
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta: float) -> void:
