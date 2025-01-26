@@ -10,9 +10,11 @@ func _ready() -> void:
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta: float) -> void:
 	emitting = true
+	if !$BubblePopSound.playing:
+		$BubblePopSound.play()
 	await get_tree().create_timer(0.5).timeout
 	emitting = false
-	await get_tree().create_timer(1.0).timeout
+	await $BubblePopSound.finished
 	var pickup = Health_pickup.instantiate()
 	add_sibling(pickup)
 	pickup.global_position = global_position
