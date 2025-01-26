@@ -2,6 +2,7 @@ extends GPUParticles3D
 
 var Health_pickup = preload("res://health_pickup.tscn")
 var randomised : bool = false
+var spawned_heal : bool = false
 var rand_drop : int
 
 # Called when the node enters the scene tree for the first time.
@@ -19,8 +20,8 @@ func _process(delta: float) -> void:
 	if !randomised:
 		rand_drop = randi_range(0,4)
 		randomised = true
-	if rand_drop >= 3:
-		print(rand_drop)
+	if rand_drop >= 3 && !spawned_heal:
+		spawned_heal = true
 		_drop_heal()
 	else:
 		await $BubblePopSound.finished
