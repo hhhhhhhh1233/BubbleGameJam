@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Enemy.gd" id="1_u1mr4"]
 [ext_resource type="Script" path="res://EnemyNavigation.gd" id="2_43a8a"]
-[ext_resource type="PackedScene" uid="uid://piugtnyt28ei" path="res://Bubble_pop_explosion_scene.tscn" id="2_e0fqm"]
+[ext_resource type="PackedScene" path="res://Bubble_pop_explosion_scene.tscn" id="2_e0fqm"]
 [ext_resource type="PackedScene" uid="uid://bxwgpxxrf48uq" path="res://3D/Enemy/roach.tscn" id="2_sdkw4"]
 [ext_resource type="Script" path="res://health_component.gd" id="3_nswuu"]
 [ext_resource type="Material" uid="uid://bex0j45wf5bul" path="res://Bubble.material" id="5_bwnnp"]
@@ -10,7 +10,7 @@
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_8fg43"]
 
 [sub_resource type="SphereShape3D" id="SphereShape3D_4p3sc"]
-radius = 50.0
+radius = 500.0
 
 [sub_resource type="SphereMesh" id="SphereMesh_d3fgm"]
 
@@ -29,7 +29,7 @@ material = ExtResource("5_bwnnp")
 
 [node name="Enemy" type="CharacterBody3D" node_paths=PackedStringArray("aggroCollision")]
 collision_layer = 20
-collision_mask = 23
+collision_mask = 7
 axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_u1mr4")
@@ -61,29 +61,27 @@ script = ExtResource("3_nswuu")
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1, 0)
 
 [node name="Skeleton3D" parent="Body/Enemy" index="0"]
-bones/0/position = Vector3(0.248231, -0.844444, -33.8998)
-bones/0/rotation = Quaternion(-0.726001, -0.0099945, -0.00293586, 0.687614)
-bones/1/rotation = Quaternion(0.109324, -0.0020656, 0.00108251, 0.994004)
-bones/2/rotation = Quaternion(0.0927248, -0.00593288, 0.00107409, 0.995674)
-bones/3/rotation = Quaternion(0.0705641, -0.00553573, 0.000786131, 0.997492)
-bones/4/rotation = Quaternion(-0.0391312, -0.00157825, -0.0213948, 0.999004)
-bones/5/rotation = Quaternion(-0.164256, 0.0319562, -0.0131026, 0.985813)
-bones/7/rotation = Quaternion(-0.756442, -0.34283, 0.483501, -0.276569)
-bones/8/position = Vector3(8.1624e-06, 11.4614, 6.62023e-08)
-bones/8/rotation = Quaternion(-0.207605, -0.314728, 0.182392, 0.908064)
-bones/9/rotation = Quaternion(0.201979, 0.0856145, 0.569188, 0.792401)
-bones/11/rotation = Quaternion(0.709695, -0.380956, 0.529849, 0.265453)
-bones/12/position = Vector3(-3.03323e-06, 11.4614, -8.40787e-07)
-bones/12/rotation = Quaternion(-0.122836, 0.141903, -0.167825, 0.967786)
-bones/13/rotation = Quaternion(0.207973, 0.126293, -0.660738, 0.710086)
-bones/15/rotation = Quaternion(0.0728127, 0.271442, 0.919587, -0.27455)
-bones/16/rotation = Quaternion(-0.518277, 0.0364289, -0.136903, 0.843397)
-bones/17/rotation = Quaternion(0.629114, -0.118478, -0.0795978, 0.764096)
-bones/18/rotation = Quaternion(0.392041, 0.291941, -0.213313, 0.845915)
-bones/20/rotation = Quaternion(-0.157851, 0.283501, 0.920615, 0.217204)
-bones/21/rotation = Quaternion(-0.515958, -0.0905674, 0.0420851, 0.850773)
-bones/22/rotation = Quaternion(0.610185, 0.164716, 0.0991129, 0.768583)
-bones/23/rotation = Quaternion(0.39565, -0.198016, 0.217163, 0.87011)
+bones/0/position = Vector3(0.26656, -0.807572, -33.7763)
+bones/0/rotation = Quaternion(-0.717846, -0.00966809, -0.00319346, 0.696127)
+bones/1/rotation = Quaternion(0.119068, 0.00150244, 0.00290705, 0.992881)
+bones/2/rotation = Quaternion(0.143467, 0.003169, 0.00583351, 0.989633)
+bones/3/rotation = Quaternion(0.0962684, 0.00238816, 0.00649315, 0.995331)
+bones/4/rotation = Quaternion(-0.0122915, -0.00804199, 0.00410336, 0.999884)
+bones/5/rotation = Quaternion(-0.200698, 0.0320815, -0.0161932, 0.978994)
+bones/7/rotation = Quaternion(-0.758031, -0.361112, 0.476318, -0.260976)
+bones/8/rotation = Quaternion(-0.068249, -0.137984, 0.229535, 0.961049)
+bones/9/rotation = Quaternion(0.205294, 0.055178, 0.506882, 0.835392)
+bones/11/rotation = Quaternion(0.72563, -0.378832, 0.512311, 0.259778)
+bones/12/rotation = Quaternion(-0.00133883, 0.0976961, -0.199776, 0.974958)
+bones/13/rotation = Quaternion(0.194461, 0.151176, -0.568982, 0.784595)
+bones/15/rotation = Quaternion(0.0807373, 0.289505, 0.913129, -0.275435)
+bones/16/rotation = Quaternion(-0.5278, 0.034551, -0.13644, 0.837626)
+bones/17/rotation = Quaternion(0.630574, -0.110995, -0.0809316, 0.763876)
+bones/18/rotation = Quaternion(0.391497, 0.292082, -0.213416, 0.846092)
+bones/20/rotation = Quaternion(-0.15597, 0.298864, 0.9158, 0.218322)
+bones/21/rotation = Quaternion(-0.524362, -0.0880278, 0.0466536, 0.845647)
+bones/22/rotation = Quaternion(0.613157, 0.166948, 0.0974835, 0.76594)
+bones/23/rotation = Quaternion(0.393172, -0.198242, 0.217485, 0.871101)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 amount = 40
@@ -91,11 +89,5 @@ amount_ratio = 0.0
 lifetime = 1.5
 process_material = SubResource("ParticleProcessMaterial_t73ew")
 draw_pass_1 = SubResource("SphereMesh_qlgje")
-
-[node name="WalkSound" type="AudioStreamPlayer3D" parent="."]
-
-[node name="AttackSound" type="AudioStreamPlayer3D" parent="."]
-
-[node name="HitSound" type="AudioStreamPlayer3D" parent="."]
 
 [editable path="Body"]

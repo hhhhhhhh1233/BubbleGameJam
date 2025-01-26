@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://bubbled_enemy.gd" id="1_4afgl"]
 [ext_resource type="PackedScene" uid="uid://dvkk5iitfh6bd" path="res://Enemy.tscn" id="2_hhpa0"]
-[ext_resource type="PackedScene" uid="uid://piugtnyt28ei" path="res://Bubble_pop_explosion_scene.tscn" id="3_7my5g"]
+[ext_resource type="PackedScene" path="res://Bubble_pop_explosion_scene.tscn" id="3_7my5g"]
 [ext_resource type="Material" uid="uid://bex0j45wf5bul" path="res://Bubble.material" id="4_ga0mt"]
 [ext_resource type="Texture2D" uid="uid://4dwiggx6xrpy" path="res://3D/Enemy/enemy_Image_0.png" id="5_e3mi4"]
 [ext_resource type="AudioStream" uid="uid://yi2p12hoo5oo" path="res://Audio/EnemyToBubble.wav" id="6_rk8du"]

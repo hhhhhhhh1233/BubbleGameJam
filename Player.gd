@@ -60,9 +60,12 @@ func _physics_process(delta: float) -> void:
 	# As good practice, you should replace UI actions with custom gameplay actions.
 	var input_dir := Input.get_vector("left", "right", "forward", "back")
 	var direction := Vector3($SpringArm3D.transform.basis * Vector3(input_dir.x, 0, input_dir.y))
+	var run_direction = direction
+	run_direction.y = 0
+	run_direction = run_direction.normalized()
 	if direction:
-		velocity.x = direction.x * SPEED
-		velocity.z = direction.z * SPEED
+		velocity.x = run_direction.x * SPEED
+		velocity.z = run_direction.z * SPEED
 		$Body.rotation.y = lerp_angle($Body.rotation.y - PI/2, atan2(-direction.z, direction.x), 10 * delta) + PI/2
 		
 		if is_on_floor() :

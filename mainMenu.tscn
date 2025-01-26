@@ -1,0 +1,106 @@
+[gd_scene load_steps=7 format=3 uid="uid://dgofsthepc6ao"]
+
+[ext_resource type="Script" path="res://main_menu.gd" id="1_2s8ak"]
+[ext_resource type="Texture2D" uid="uid://b0k1d6hrand8r" path="res://2D/Menu/Play.png" id="2_326wj"]
+[ext_resource type="Texture2D" uid="uid://d3r3jgdbk0vyv" path="res://2D/Menu/Quit.png" id="3_puddn"]
+[ext_resource type="Texture2D" uid="uid://dx7gyh3jr4pvc" path="res://2D/Menu/MenuButtonSelect.png" id="3_tisrf"]
+[ext_resource type="Texture2D" uid="uid://b7uavfafxfygr" path="res://2D/Menu/LogoNotText.png" id="4_05qhx"]
+[ext_resource type="Texture2D" uid="uid://dgrch0tswkjs2" path="res://2D/Menu/LogoText.png" id="5_2fwjc"]
+
+[node name="MainMenu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_2s8ak")
+
+[node name="ColorRect" type="ColorRect" parent="."]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.321728, 0.321728, 0.321728, 1)
+
+[node name="Play" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -172.0
+offset_right = 1032.0
+offset_bottom = 92.0
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+focus_neighbor_bottom = NodePath("../Quit")
+icon = ExtResource("2_326wj")
+flat = true
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/Play"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_tisrf")
+
+[node name="Quit" type="Button" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 4
+anchor_top = 0.5
+anchor_bottom = 0.5
+offset_top = -32.0
+offset_right = 1032.0
+offset_bottom = 232.0
+grow_vertical = 2
+scale = Vector2(0.4, 0.4)
+focus_neighbor_top = NodePath("../Play")
+icon = ExtResource("3_puddn")
+flat = true
+expand_icon = true
+
+[node name="TextureRect" type="TextureRect" parent="ColorRect/Quit"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("3_tisrf")
+
+[node name="logo" type="TextureRect" parent="ColorRect"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -625.0
+offset_top = -306.0
+offset_right = 399.0
+offset_bottom = 718.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.6, 0.6)
+texture = ExtResource("4_05qhx")
+
+[node name="pivot" type="Control" parent="ColorRect/logo"]
+anchors_preset = 0
+offset_left = 512.0
+offset_top = 512.0
+offset_right = 552.0
+offset_bottom = 552.0
+
+[node name="text" type="TextureRect" parent="ColorRect/logo/pivot"]
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -552.0
+offset_top = -532.0
+offset_right = 472.0
+offset_bottom = 492.0
+grow_horizontal = 0
+grow_vertical = 2
+texture = ExtResource("5_2fwjc")
