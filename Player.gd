@@ -36,8 +36,8 @@ func _physics_process(delta: float) -> void:
 	if Input.is_action_just_pressed("quit_game"):
 		get_tree().quit()
 	if healthComponent.health <= 0:
-		if Input.is_action_just_pressed("restart"):
-			get_tree().reload_current_scene()
+		#if Input.is_action_just_pressed("restart"):
+			#get_tree().reload_current_scene()
 			
 		return
 	# Add the gravity.
@@ -133,7 +133,7 @@ func _physics_process(delta: float) -> void:
 					#print(enemy)
 			
 func _input(event: InputEvent) -> void:
-	if event is InputEventMouseMotion:
+	if event is InputEventMouseMotion and healthComponent.health>0:
 		if springArm.rotation.x-event.relative.y*sensitivityMouse>camMin and springArm.rotation.x-event.relative.y*sensitivityMouse<camMax:
 			springArm.rotation.x += -event.relative.y*sensitivityMouse
 		springArm.rotation.y += -event.relative.x*sensitivityMouse
