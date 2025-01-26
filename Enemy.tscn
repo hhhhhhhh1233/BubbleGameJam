@@ -2,8 +2,8 @@
 
 [ext_resource type="Script" path="res://Enemy.gd" id="1_u1mr4"]
 [ext_resource type="Script" path="res://EnemyNavigation.gd" id="2_43a8a"]
-[ext_resource type="PackedScene" path="res://Bubble_pop_explosion_scene.tscn" id="2_e0fqm"]
-[ext_resource type="PackedScene" uid="uid://bxwgpxxrf48uq" path="res://3D/Enemy/roach.tscn" id="2_sdkw4"]
+[ext_resource type="PackedScene" uid="uid://piugtnyt28ei" path="res://Bubble_pop_explosion_scene.tscn" id="2_e0fqm"]
+[ext_resource type="PackedScene" path="res://3D/Enemy/roach.tscn" id="2_sdkw4"]
 [ext_resource type="Script" path="res://health_component.gd" id="3_nswuu"]
 [ext_resource type="Material" uid="uid://bex0j45wf5bul" path="res://Bubble.material" id="5_bwnnp"]
 
@@ -61,29 +61,29 @@ script = ExtResource("3_nswuu")
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1, 0)
 
 [node name="Skeleton3D" parent="Body/Enemy" index="0"]
-bones/0/position = Vector3(0.254857, -0.850412, -33.7388)
-bones/0/rotation = Quaternion(-0.715982, -0.00934804, -0.003628, 0.698047)
-bones/1/rotation = Quaternion(0.120772, 0.00162318, 0.00293437, 0.992675)
-bones/2/rotation = Quaternion(0.149348, 0.00322617, 0.0062446, 0.98876)
-bones/3/rotation = Quaternion(0.0995285, 0.00243624, 0.00679961, 0.995009)
-bones/4/rotation = Quaternion(-0.0030362, -0.00811537, 0.00380577, 0.999955)
-bones/5/rotation = Quaternion(-0.201309, 0.0309809, -0.0162614, 0.978903)
-bones/7/rotation = Quaternion(-0.75792, -0.363005, 0.475952, -0.259333)
+bones/0/position = Vector3(0.233834, -0.91578, -33.6909)
+bones/0/rotation = Quaternion(-0.713793, -0.00850301, -0.00459938, 0.70029)
+bones/1/rotation = Quaternion(0.122924, 0.00168545, 0.00302251, 0.99241)
+bones/2/rotation = Quaternion(0.156261, 0.00312353, 0.00668978, 0.987688)
+bones/3/rotation = Quaternion(0.10344, 0.00249391, 0.00716737, 0.994607)
+bones/4/rotation = Quaternion(0.00719335, -0.00801573, 0.002827, 0.999938)
+bones/5/rotation = Quaternion(-0.20249, 0.0296247, -0.0162915, 0.978701)
+bones/7/rotation = Quaternion(-0.757666, -0.365092, 0.475741, -0.257528)
 bones/8/position = Vector3(8.1624e-06, 11.4614, 6.62023e-08)
-bones/8/rotation = Quaternion(-0.0674521, -0.134822, 0.239773, 0.959053)
-bones/9/rotation = Quaternion(0.20416, 0.0526899, 0.493195, 0.84398)
-bones/11/rotation = Quaternion(0.72706, -0.378455, 0.511019, 0.258874)
+bones/8/rotation = Quaternion(-0.0665181, -0.135405, 0.254053, 0.955352)
+bones/9/rotation = Quaternion(0.202641, 0.049804, 0.475065, 0.85485)
+bones/11/rotation = Quaternion(0.728512, -0.37804, 0.509767, 0.257864)
 bones/12/position = Vector3(-3.03323e-06, 11.4614, -8.40787e-07)
-bones/12/rotation = Quaternion(0.00119851, 0.105116, -0.205729, 0.972947)
-bones/13/rotation = Quaternion(0.194464, 0.153229, -0.560601, 0.790209)
-bones/15/rotation = Quaternion(0.0809773, 0.294627, 0.911443, -0.275518)
-bones/16/rotation = Quaternion(-0.529648, 0.0345678, -0.136463, 0.836454)
-bones/17/rotation = Quaternion(0.630412, -0.110629, -0.0809177, 0.764064)
-bones/18/rotation = Quaternion(0.391423, 0.292095, -0.213431, 0.846118)
-bones/20/rotation = Quaternion(-0.155644, 0.303149, 0.914465, 0.218243)
-bones/21/rotation = Quaternion(-0.526645, -0.0875764, 0.0478083, 0.84421)
-bones/22/rotation = Quaternion(0.613593, 0.167602, 0.0965805, 0.765562)
-bones/23/rotation = Quaternion(0.393155, -0.198233, 0.217453, 0.871118)
+bones/12/rotation = Quaternion(0.00230418, 0.113578, -0.210922, 0.970879)
+bones/13/rotation = Quaternion(0.196533, 0.155964, -0.554871, 0.793201)
+bones/15/rotation = Quaternion(0.0810426, 0.301384, 0.909272, -0.275361)
+bones/16/rotation = Quaternion(-0.531896, 0.0346179, -0.13638, 0.835038)
+bones/17/rotation = Quaternion(0.629851, -0.110118, -0.0808877, 0.764604)
+bones/18/rotation = Quaternion(0.391331, 0.292109, -0.213451, 0.846151)
+bones/20/rotation = Quaternion(-0.155548, 0.308098, 0.912778, 0.21844)
+bones/21/rotation = Quaternion(-0.529465, -0.0870148, 0.0494368, 0.842408)
+bones/22/rotation = Quaternion(0.614182, 0.168587, 0.0953497, 0.765028)
+bones/23/rotation = Quaternion(0.393135, -0.198223, 0.217415, 0.871139)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 amount = 40
