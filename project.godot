@@ -13,7 +13,7 @@ config_version=5
 config/name="BubbleGameJam"
 run/main_scene="res://test_level.tscn"
 config/features=PackedStringArray("4.3", "GL Compatibility")
-config/icon="res://icon.svg"
+config/icon="res://Icon.png"
 
 [autoload]
 
@@ -109,6 +109,7 @@ restart={
 3d_physics/layer_3="Enemy"
 3d_physics/layer_4="enemy_bubble"
 3d_physics/layer_5="Sharp_Objects"
+3d_physics/layer_6="health_pickups"
 
 [physics]
 

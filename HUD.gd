@@ -4,7 +4,8 @@ extends CanvasLayer
 @onready var currentWave:Label = $Control/currentWave
 @onready var urDeadBro:Label = $Control/urDeadBro
 @onready var info:Label = $Control/info
-#@onready var deathscreen:TextureRect = $Control/TextureRect
+@onready var deathscreen:TextureRect = $Control/death
+
 @onready var restartButton:Button = $Control/restartButton
 @onready var quitButton:Button = $Control/quitButton
 
@@ -23,7 +24,7 @@ func _ready() -> void:
 func _process(delta: float) -> void:
 	if healthComponent.health <= 0:
 		Input.mouse_mode=Input.MOUSE_MODE_VISIBLE
-		#deathscreen.visible = true
+		deathscreen.visible = true
 		health.text = ""
 		currentWave.text = ""
 		restartButton.set_disabled(false)
@@ -33,7 +34,7 @@ func _process(delta: float) -> void:
 		
 		#urDeadBro.text = "You died\nYou got to wave " + str(WaveInformation.WaveCount) + "\nPress A/X/Enter to restart"
 	else:
-		#deathscreen.visible = false
+		deathscreen.visible = false
 		Input.mouse_mode=Input.MOUSE_MODE_CAPTURED
 		restartButton.set_disabled(true)
 		restartButton.visible=false
