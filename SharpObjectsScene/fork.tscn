@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://5plgkxffsb21"]
 
-[ext_resource type="PackedScene" uid="uid://cbgkn5w61ex3p" path="res://3D/Damager/fork.glb" id="1_jhpkb"]
+[ext_resource type="PackedScene" uid="uid://uxw0gapnfsy7" path="res://3D/Damager/fork_model.tscn" id="1_ar1up"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_xlsit"]
 size = Vector3(1, 0.536255, 3.91687)
@@ -13,5 +13,5 @@ collision_mask = 0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0458484, -0.0278931)
 shape = SubResource("BoxShape3D_xlsit")
 
-[node name="fork" parent="." instance=ExtResource("1_jhpkb")]
+[node name="fork2" parent="." instance=ExtResource("1_ar1up")]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
