@@ -1,0 +1,16 @@
+[gd_scene load_steps=3 format=3 uid="uid://cq2cec6dq4c02"]
+
+[ext_resource type="Script" path="res://Killzone.gd" id="1_0b5mq"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_mh7yo"]
+size = Vector3(100, 1, 100)
+
+[node name="Killzone" type="Area3D"]
+collision_layer = 0
+collision_mask = 2
+script = ExtResource("1_0b5mq")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("BoxShape3D_mh7yo")
+
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
