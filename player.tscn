@@ -1,10 +1,11 @@
-[gd_scene load_steps=17 format=3 uid="uid://bdhl3wjtvr113"]
+[gd_scene load_steps=18 format=3 uid="uid://bdhl3wjtvr113"]
 
 [ext_resource type="Script" path="res://Player.gd" id="1_wc8xc"]
 [ext_resource type="PackedScene" path="res://bubbled_enemy.tscn" id="2_b8svv"]
 [ext_resource type="Script" path="res://health_component.gd" id="2_elalu"]
 [ext_resource type="PackedScene" path="res://3D/Rat/rat.tscn" id="3_q63yt"]
 [ext_resource type="Script" path="res://HUD.gd" id="5_d18j7"]
+[ext_resource type="Texture2D" uid="uid://d3r3jgdbk0vyv" path="res://2D/Menu/Quit.png" id="6_tq66w"]
 [ext_resource type="Script" path="res://restartButton.gd" id="7_fkdph"]
 [ext_resource type="Script" path="res://quitButton.gd" id="8_d8xo1"]
 
@@ -49,44 +50,44 @@ shape = SubResource("CapsuleShape3D_1m7lv")
 [node name="Body" parent="." instance=ExtResource("3_q63yt")]
 
 [node name="Skeleton3D" parent="Body/RatSkeleton" index="0"]
-bones/0/position = Vector3(-0.299715, 7.07016, -32.5624)
-bones/0/rotation = Quaternion(-0.620421, -0.378448, 0.357876, 0.586327)
-bones/1/rotation = Quaternion(0.233599, 0.0643458, -0.0147422, 0.97009)
-bones/2/rotation = Quaternion(0.0875913, 0.0210158, -0.00615299, 0.995916)
-bones/3/rotation = Quaternion(0.0875543, 0.0209674, -0.00634159, 0.995919)
-bones/4/rotation = Quaternion(-0.0319486, -0.140503, -0.0172921, 0.989413)
-bones/5/rotation = Quaternion(0.0431034, 0.302638, -0.0757917, 0.949109)
-bones/7/rotation = Quaternion(-0.591929, -0.374361, 0.62709, -0.340929)
-bones/8/rotation = Quaternion(0.25501, -0.711772, -0.0943243, 0.647652)
-bones/9/rotation = Quaternion(0.337535, 0.00478619, 0.243552, 0.909247)
-bones/10/rotation = Quaternion(-0.295892, 0.909325, -0.137297, 0.258313)
+bones/0/position = Vector3(-0.333635, 7.15314, -32.6618)
+bones/0/rotation = Quaternion(-0.628959, -0.372946, 0.342944, 0.589671)
+bones/1/rotation = Quaternion(0.23807, 0.0663881, -0.0162513, 0.96884)
+bones/2/rotation = Quaternion(0.0926218, 0.0216225, -0.00657475, 0.995445)
+bones/3/rotation = Quaternion(0.0927538, 0.0215419, -0.00670935, 0.995433)
+bones/4/rotation = Quaternion(-0.0313399, -0.141441, -0.0147677, 0.98934)
+bones/5/rotation = Quaternion(0.0287764, 0.295431, -0.0662133, 0.952632)
+bones/7/rotation = Quaternion(-0.574787, -0.416226, 0.571621, -0.411855)
+bones/8/rotation = Quaternion(0.26079, -0.769358, 0.000861824, 0.583161)
+bones/9/rotation = Quaternion(0.352171, 0.00528346, 0.243869, 0.903591)
+bones/10/rotation = Quaternion(-0.299994, 0.892477, -0.230386, 0.245788)
 bones/11/rotation = Quaternion(-0.250774, -0.183268, 0.537017, 0.784307)
 bones/12/rotation = Quaternion(0.109724, 0.0255145, -0.145646, 0.982902)
 bones/13/rotation = Quaternion(0.379353, 0.0326362, -0.134332, 0.914867)
 bones/15/rotation = Quaternion(-0.445091, 0.16001, 0.513928, 0.71566)
 bones/16/rotation = Quaternion(-0.274197, 0.0508736, 0.573401, 0.77035)
 bones/17/rotation = Quaternion(-0.179512, -0.0537849, 0.490023, 0.851328)
-bones/19/rotation = Quaternion(0.610506, -0.384946, 0.547105, 0.423999)
-bones/20/rotation = Quaternion(0.177528, 0.738992, -0.0869471, 0.644062)
+bones/19/rotation = Quaternion(0.572911, -0.442558, 0.500455, 0.474827)
+bones/20/rotation = Quaternion(0.187443, 0.788161, -0.0647993, 0.582639)
 bones/21/rotation = Quaternion(0.0745061, -0.0112465, -0.125073, 0.989282)
-bones/22/rotation = Quaternion(0.104607, 0.963476, -0.0473439, 0.241931)
+bones/22/rotation = Quaternion(0.21192, 0.944835, -0.149578, 0.200007)
 bones/23/rotation = Quaternion(-0.371857, 0.145149, -0.378696, 0.835011)
 bones/24/rotation = Quaternion(0.161851, 0.00741042, 0.0609898, 0.984901)
 bones/25/rotation = Quaternion(0.0833551, -0.00162167, 0.0290499, 0.996095)
-bones/27/rotation = Quaternion(-0.214463, 0.0509975, 0.0704613, 0.972851)
-bones/28/rotation = Quaternion(-0.161171, -0.0267805, -0.253127, 0.953537)
+bones/27/rotation = Quaternion(-0.200538, 0.0597687, 0.0997465, 0.97276)
+bones/28/rotation = Quaternion(-0.118545, -0.015512, -0.144928, 0.982193)
 bones/29/position = Vector3(-0.369527, 3.4432, 4.96465e-07)
-bones/29/rotation = Quaternion(-0.0304803, 0.0128768, -0.228579, 0.972963)
+bones/29/rotation = Quaternion(0.065276, -0.0813532, -0.187338, 0.976742)
 bones/30/rotation = Quaternion(0.00740536, 0.066411, -0.114682, 0.991152)
 bones/31/rotation = Quaternion(-0.294214, 0.233483, -0.569196, 0.731396)
-bones/32/rotation = Quaternion(0.196138, 0.338763, 0.885844, -0.249098)
-bones/33/rotation = Quaternion(-0.784868, -0.17456, 0.213626, 0.554864)
-bones/34/rotation = Quaternion(0.616242, 0.226373, -0.12172, 0.744436)
-bones/35/rotation = Quaternion(0.608375, -0.118839, 0.00154252, 0.7847)
-bones/37/rotation = Quaternion(-0.0829877, 0.581568, 0.797888, 0.135151)
-bones/38/rotation = Quaternion(-0.893124, 0.067053, -0.334767, 0.292857)
-bones/39/rotation = Quaternion(0.608841, -0.142069, 0.162753, 0.763309)
-bones/40/rotation = Quaternion(0.145537, -0.00659484, -0.0437607, 0.988363)
+bones/32/rotation = Quaternion(0.19056, 0.350791, 0.879595, -0.258738)
+bones/33/rotation = Quaternion(-0.784818, -0.184835, 0.224242, 0.547368)
+bones/34/rotation = Quaternion(0.592154, 0.259695, -0.119218, 0.753459)
+bones/35/rotation = Quaternion(0.629818, -0.110384, -0.00746886, 0.768823)
+bones/37/rotation = Quaternion(-0.0796045, 0.604907, 0.780654, 0.135387)
+bones/38/rotation = Quaternion(-0.898228, 0.0645121, -0.340246, 0.270663)
+bones/39/rotation = Quaternion(0.587078, -0.143158, 0.165072, 0.779485)
+bones/40/rotation = Quaternion(0.144455, -0.00709903, -0.0436948, 0.988521)
 bones/43/rotation = Quaternion(-0.143087, 0.0144702, -0.281458, 0.948735)
 bones/44/rotation = Quaternion(0.054778, 0.00060393, -0.139363, 0.988725)
 bones/45/rotation = Quaternion(-0.0754115, -0.000641457, -0.109077, 0.991168)
@@ -204,11 +205,20 @@ text = "hello"
 label_settings = SubResource("LabelSettings_ulvgw")
 
 [node name="quitButton" type="Button" parent="CanvasLayer/Control"]
-layout_mode = 0
-offset_left = 770.0
-offset_top = 250.0
-offset_right = 790.0
-offset_bottom = 270.0
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -301.0
+offset_top = -15.0
+offset_right = 731.0
+offset_bottom = 249.0
+grow_horizontal = 0
+grow_vertical = 2
+scale = Vector2(0.2, 0.2)
+icon = ExtResource("6_tq66w")
 script = ExtResource("8_d8xo1")
 
 [node name="restartButton" type="Button" parent="CanvasLayer/Control"]
