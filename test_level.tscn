@@ -2,7 +2,7 @@
 
 [ext_resource type="PackedScene" uid="uid://bdhl3wjtvr113" path="res://player.tscn" id="1_efvf3"]
 [ext_resource type="PackedScene" uid="uid://dkyqp15ixspar" path="res://wave_manager.tscn" id="3_b1k66"]
-[ext_resource type="PackedScene" uid="uid://bl62ckx5fjjs5" path="res://cactus.tscn" id="3_o1cih"]
+[ext_resource type="PackedScene" path="res://cactus.tscn" id="3_o1cih"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_iu66l"]
 sky_horizon_color = Color(0.64625, 0.65575, 0.67075, 1)
