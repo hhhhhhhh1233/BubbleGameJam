@@ -1,8 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://dvkk5iitfh6bd"]
+[gd_scene load_steps=12 format=3 uid="uid://dvkk5iitfh6bd"]
 
 [ext_resource type="Script" path="res://Enemy.gd" id="1_u1mr4"]
 [ext_resource type="Script" path="res://EnemyNavigation.gd" id="2_43a8a"]
-[ext_resource type="PackedScene" path="res://3D/Enemy/roach.tscn" id="2_sdkw4"]
+[ext_resource type="PackedScene" path="res://Bubble_pop_explosion_scene.tscn" id="2_e0fqm"]
+[ext_resource type="PackedScene" uid="uid://bxwgpxxrf48uq" path="res://3D/Enemy/roach.tscn" id="2_sdkw4"]
 [ext_resource type="Script" path="res://health_component.gd" id="3_nswuu"]
 [ext_resource type="Material" uid="uid://bex0j45wf5bul" path="res://Bubble.material" id="5_bwnnp"]
 
@@ -33,6 +34,7 @@ axis_lock_angular_x = true
 axis_lock_angular_z = true
 script = ExtResource("1_u1mr4")
 aggroCollision = NodePath("NavigationAgent3D/AggroCollision")
+poppedScene = ExtResource("2_e0fqm")
 
 [node name="BodyCollision" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_8fg43")
@@ -59,27 +61,29 @@ script = ExtResource("3_nswuu")
 transform = Transform3D(2, 0, 0, 0, 2, 0, 0, 0, 2, 0, -1, 0)
 
 [node name="Skeleton3D" parent="Body/Enemy" index="0"]
-bones/0/position = Vector3(0.394554, -0.448635, -34.0355)
-bones/0/rotation = Quaternion(-0.724588, -0.0111994, -0.0033461, 0.689083)
-bones/1/rotation = Quaternion(0.103297, -0.00212047, -0.00589044, 0.994631)
-bones/2/rotation = Quaternion(0.0577046, -0.00757213, -0.00376109, 0.998298)
-bones/3/rotation = Quaternion(0.0519345, -0.00826132, -0.00639971, 0.998596)
-bones/4/rotation = Quaternion(-0.0155519, 0.00214431, -0.0487072, 0.99869)
-bones/5/rotation = Quaternion(-0.139581, 0.035607, -0.0131025, 0.989484)
-bones/7/rotation = Quaternion(-0.693666, -0.356025, 0.524147, -0.342556)
-bones/8/rotation = Quaternion(-0.268987, -0.503153, 0.118035, 0.812743)
-bones/9/rotation = Quaternion(0.171745, 0.0797523, 0.367957, 0.910358)
-bones/11/rotation = Quaternion(0.652953, -0.400269, 0.562755, 0.311036)
-bones/12/rotation = Quaternion(-0.179896, 0.286965, -0.0839709, 0.937143)
-bones/13/rotation = Quaternion(0.200122, 0.136431, -0.592614, 0.76821)
-bones/15/rotation = Quaternion(0.0683348, 0.264608, 0.922113, -0.2739)
-bones/16/rotation = Quaternion(-0.515956, 0.0378664, -0.139781, 0.844285)
-bones/17/rotation = Quaternion(0.635306, -0.123326, -0.0770004, 0.758451)
-bones/18/rotation = Quaternion(0.392398, 0.291848, -0.213245, 0.845798)
-bones/20/rotation = Quaternion(-0.158366, 0.274933, 0.923252, 0.21665)
-bones/21/rotation = Quaternion(-0.50666, -0.0929206, 0.0389273, 0.85624)
-bones/22/rotation = Quaternion(0.609761, 0.166547, 0.104586, 0.767799)
-bones/23/rotation = Quaternion(0.396867, -0.197873, 0.216973, 0.869635)
+bones/0/position = Vector3(0.10006, -0.796929, -33.8503)
+bones/0/rotation = Quaternion(-0.706375, -0.00669698, -0.00733446, 0.707768)
+bones/1/rotation = Quaternion(0.123657, 0.00145341, 0.00312136, 0.992319)
+bones/2/rotation = Quaternion(0.16606, 0.00202191, 0.00904988, 0.986072)
+bones/3/rotation = Quaternion(0.104375, 0.00148708, 0.0090608, 0.994496)
+bones/4/rotation = Quaternion(0.0480221, -0.00799831, 0.00175138, 0.998813)
+bones/5/rotation = Quaternion(-0.161937, 0.0248293, -0.0194509, 0.986297)
+bones/7/rotation = Quaternion(-0.755707, -0.370408, 0.477096, -0.253151)
+bones/8/position = Vector3(8.1624e-06, 11.4614, 6.62023e-08)
+bones/8/rotation = Quaternion(-0.050476, -0.15965, 0.30009, 0.939101)
+bones/9/rotation = Quaternion(0.198692, 0.0372864, 0.416133, 0.886546)
+bones/11/rotation = Quaternion(0.731089, -0.376686, 0.508945, 0.25415)
+bones/12/position = Vector3(-3.03323e-06, 11.4614, -8.40787e-07)
+bones/12/rotation = Quaternion(0.0146758, 0.141253, -0.229309, 0.962938)
+bones/13/rotation = Quaternion(0.188658, 0.155709, -0.529424, 0.812326)
+bones/15/rotation = Quaternion(0.0759037, 0.309167, 0.907681, -0.27344)
+bones/16/rotation = Quaternion(-0.524944, 0.0366137, -0.135848, 0.839427)
+bones/17/rotation = Quaternion(0.626162, -0.118536, -0.080785, 0.766384)
+bones/18/rotation = Quaternion(0.391481, 0.292913, -0.221814, 0.843649)
+bones/20/rotation = Quaternion(-0.156456, 0.312151, 0.911716, 0.216465)
+bones/21/rotation = Quaternion(-0.523873, -0.0912104, 0.0552331, 0.845096)
+bones/22/rotation = Quaternion(0.614612, 0.172949, 0.0907931, 0.764262)
+bones/23/rotation = Quaternion(0.394955, -0.19168, 0.225398, 0.86975)
 
 [node name="GPUParticles3D" type="GPUParticles3D" parent="."]
 amount = 40
