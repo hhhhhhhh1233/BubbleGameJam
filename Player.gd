@@ -27,6 +27,9 @@ const JUMP_VELOCITY = 12
 #var bAttacking = false
 #var bLightAttack = false
 
+@export var attack_cooldown : float = 0.3
+@onready var current_attack_cooldown_time : float = 0
+
 func _ready() -> void:
 	Input.mouse_mode = Input.MouseMode.MOUSE_MODE_CAPTURED
 	lastMouse = get_viewport().get_mouse_position()
@@ -97,18 +100,26 @@ func _physics_process(delta: float) -> void:
 	move_and_slide()
 
 
+	current_attack_cooldown_time = max(current_attack_cooldown_time - delta, 0)
 	
-	if Input.is_action_just_pressed("light_attack"):
+	if current_attack_cooldown_time <= 0 and Input.is_action_just_pressed("light_attack"):
+		print("Attack!")
+		current_attack_cooldown_time = attack_cooldown
+		
 		if !$AttackSound.playing:
 			$AttackSound.play()
+		
 		if not $Body/AnimationTree["parameters/attack/active"]:
 			$Body/AnimationTree["parameters/attack/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 		for enemy in $Body/WeaponRoot/WeaponHitbox.get_overlapping_bodies():
 			enemy.get_soaped(soapDamage)
 		
-	if Input.is_action_just_pressed("heavy_attack"):
+	if current_attack_cooldown_time <= 0 and Input.is_action_just_pressed("heavy_attack"):
+		current_attack_cooldown_time = attack_cooldown
+		
 		if !$AttackSound.playing:
 			$AttackSound.play()
+		
 		if not $Body/AnimationTree["parameters/kick/active"]:
 			$Body/AnimationTree["parameters/kick/request"] = AnimationNodeOneShot.ONE_SHOT_REQUEST_FIRE
 			
@@ -121,7 +132,7 @@ func _physics_process(delta: float) -> void:
 					enemy.apply_central_impulse(hit_direction * bubbleHitForceMultiplier )
 					enemy.unbubble_timer.stop()
 					enemy.unbubble_timer.start(15)
-			
+
 func _input(event: InputEvent) -> void:
 	if event is InputEventMouseMotion and healthComponent.health>0:
 		if springArm.rotation.x-event.relative.y*sensitivityMouse>camMin and springArm.rotation.x-event.relative.y*sensitivityMouse<camMax:
@@ -134,20 +145,12 @@ func hitstop (timeScale : float, duration : float):
 	await get_tree().create_timer(duration,true,false,true).timeout
 	$Body/AnimationTree["parameters/kick_time/scale"] = 2
 	Engine.time_scale = 1.0
-	
-	
-	
-	
-	
-
 
 func _on_health_component_health_depleted() -> void:
 	$Body/AnimationTree["parameters/dead/blend_amount"] = 1
 
-
 func _on_health_component_damage_taken() -> void:
 	$HurtSound.play()
-
 
 func _on_health_component_health_restore() -> void:
 	$HealSound.play()
