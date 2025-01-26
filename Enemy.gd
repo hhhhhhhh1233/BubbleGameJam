@@ -2,7 +2,7 @@ extends CharacterBody3D
 var pos : Basis
 var speed : float = 7
 var accel : float = 5
-var direction : Vector3 = Vector3(1,0,1)
+var direction : Vector3
 @export var aggroCollision : Area3D
 @onready var nav: NavigationAgent3D = $NavigationAgent3D
 var overlappingBodies : Array[Node3D]
@@ -74,10 +74,8 @@ func _process(delta: float) -> void:
 			velocity = velocity.lerp(direction * speed * 0.3, accel * delta)
 		else:
 			velocity = velocity.lerp(direction * speed, accel * delta)
-		
-	else:
-		direction = Vector3(randf_range(0.1,1), 0, randf_range(0.1,1))
-	$Body.look_at($Body.global_position - Vector3(direction.x, 0, direction.z))
+	if $Body.global_position != $Body.global_position - Vector3(direction.x, 0, direction.z):
+		$Body.look_at($Body.global_position - Vector3(direction.x, 0, direction.z))
 	$Body/AnimationTree["parameters/speed/blend_amount"] = min(velocity.length(),1)
 	move_and_slide()
 	
