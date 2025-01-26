@@ -1,17 +1,17 @@
 [gd_scene load_steps=3 format=3 uid="uid://cktiwtweqsfkw"]
 
-[ext_resource type="PackedScene" uid="uid://bt4r1rd0pc3en" path="res://3D/Damager/grater.glb" id="1_cwx4g"]
+[ext_resource type="PackedScene" uid="uid://uimfr2lmm7w1" path="res://3D/Damager/grater_model.tscn" id="1_lq836"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_6x1s8"]
-size = Vector3(1.77936, 3.00757, 1)
+size = Vector3(3.93459, 8.35956, 2.7691)
 
 [node name="grater" type="StaticBody3D"]
 collision_layer = 16
 collision_mask = 0
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.0284119, 0.0114856, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.00449413, 0.0960498, -0.148102)
 shape = SubResource("BoxShape3D_6x1s8")
 
-[node name="grater" parent="." instance=ExtResource("1_cwx4g")]
+[node name="grater2" parent="." instance=ExtResource("1_lq836")]
 transform = Transform3D(8, 0, 0, 0, 8, 0, 0, 0, 8, 0, 0, 0)
