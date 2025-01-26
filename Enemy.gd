@@ -11,7 +11,7 @@ var overlappingBodies : Array[Node3D]
 
 var whackDelay = 0.3
 var whackCooldown = 1
-var whackDamage = 20
+var whackDamage = 5
 var canWhack:bool
 var soapiness = 0.0
 var maxSoapiness = 1.0
